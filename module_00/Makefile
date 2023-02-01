@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/28 17:55:29 by azamario          #+#    #+#              #
-#    Updated: 2023/02/01 00:59:31 by azamario         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME			= megaphone
 
@@ -38,7 +27,7 @@ clean:
 			@echo "$(ORANGE)Object files removed" $(RESET)"
 
 fclean:		
-			@rm -f $(NAME)	
+			@rm -f $(NAME) $(OBJECT)	
 			@echo "$(ORANGE)Executable removed $(RESET)"
 
 re:			fclean all
