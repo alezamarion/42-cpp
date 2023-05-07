@@ -1,32 +1,48 @@
-NAME			= phonebook
+SOURCE_FILES	=	main.cpp Contact.cpp PhoneBook.cpp
 
-SOURCE			= main.cpp, Contact.cpp, PhoneBook.cpp
+SOURCE_DIR		=	./
 
-OBJECT			= $(SOURCE:.cpp=.o)
+OBJ_DIR			=	objects
 
-COMPILE			= clang++
+HEADERS			=	Contact.hpp PhoneBook.hpp 
 
-FLAGS			= -Wall -Wextra -Werror -std=c++98 -fsanitize=address
+SOURCES			=	$(addprefix $(SOURCE_DIR)/, $(SOURCE_FILES))
+
+OBJECTS			=	$(SOURCES:$(SOURCE_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+
+NAME			=	phonebook
+
+CC				=	c++
+CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -fsanitize=address
+
+RM				=	rm -rf
+
+$(OBJ_DIR)/%.o:		$(SOURCE_DIR)/%.cpp $(HEADERS)
+					$(CC) $(CFLAGS) -c $< -o $@
+
+all:				$(NAME)
 
 RESET			= 	\033[0m
 GREEN 			= 	\033[38;5;46m
 ORANGE 			= 	\033[38;5;202m
 
-all:	$(NAME)
-
-%.o:	%.cpp
-		@$(COMPILE) $(FLAGS) -c $< -o $@
-
-$(NAME):	$(OBJECT)
-			@$(COMPILE) $(FLAGS) $(OBJECT) -o $(NAME)
+$(NAME):	$(OBJ_DIR) $(OBJECTS) $(HEADERS)
+			$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 			@echo "$(GREEN)Executable OK!	$(RESET)"
-		
+
+$(OBJ_DIR):
+			mkdir -p $(OBJ_DIR)
+
+run:
+			./$(NAME)
+
 clean:
-			@rm -f $(OBJECT)
+			@$(RM) $(OBJ_DIR)
 			@echo "$(ORANGE)Object files removed" $(RESET)"
 
 fclean:		
-			@rm -f $(NAME) $(OBJECT)	
+			clean
+			$(RM) $(NAME)	
 			@echo "$(ORANGE)Executable removed $(RESET)"
 
 re:			fclean all

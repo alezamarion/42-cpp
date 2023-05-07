@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:03:47 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/06 17:17:08 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/06 23:49:23 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void PhoneBook::addContact(std::string firstName, std::string lastName, std::str
                                             this->_count++;
                                     this->_index++;
                                     if (this->_index >= 8)
-                                            this->_index %- 8;
+                                            this->_index %= 8;
                             }
 
 void PhoneBook::printOneContact(Contact contact)
