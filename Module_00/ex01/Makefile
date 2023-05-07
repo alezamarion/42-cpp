@@ -24,26 +24,24 @@ all:				$(NAME)
 
 RESET			= 	\033[0m
 GREEN 			= 	\033[38;5;46m
-ORANGE 			= 	\033[38;5;202m
 
 $(NAME):	$(OBJ_DIR) $(OBJECTS) $(HEADERS)
 			$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 			@echo "$(GREEN)Executable OK!	$(RESET)"
 
 $(OBJ_DIR):
-			mkdir -p $(OBJ_DIR)
+			@mkdir -p $(OBJ_DIR)
 
 run:
 			./$(NAME)
 
 clean:
 			@$(RM) $(OBJ_DIR)
-			@echo "$(ORANGE)Object files removed" $(RESET)"
+			@echo "$(GREEN)Object files removed $(RESET)"
 
-fclean:		
-			clean
-			$(RM) $(NAME)	
-			@echo "$(ORANGE)Executable removed $(RESET)"
+fclean:		clean
+			@$(RM) $(NAME)	
+			@echo "$(GREEN)Executable removed $(RESET)"
 
 re:			fclean all
 
