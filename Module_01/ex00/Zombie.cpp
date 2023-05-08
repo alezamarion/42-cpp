@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:54:26 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/07 16:05:46 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/07 16:34:35 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Zombie::Zombie(std::string name)
 {
-    _name = name;
+   this->_name = name;
 }
 
 Zombie::~Zombie(void)
