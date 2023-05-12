@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 12:37:08 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/12 12:39:08 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:49:09 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ Cat &Cat::operator=(Cat const &rhs)
 
 void Cat::makeSound(void) const
 {
-    std::cout <<"Meow 🐈\n";
+    std::cout <<"Meow! 🐈\n";
 }
