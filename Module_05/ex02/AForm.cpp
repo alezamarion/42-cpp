@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:16:59 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/15 11:17:02 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:32:47 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
     return;
  }
 
-AForm::AForm(const std::string name, const int gradeSing, const int gradeExec) : _name(name), _isFormSigned(false),
-                                                                               _gradeToSign(gradeSing),
-                                                                               _gradeToExecute(gradeExec)
+AForm::AForm(const std::string name, const int gradeSing, const int gradeExec) 
+    : _name(name), _isFormSigned(false), _gradeToSign(gradeSing), _gradeToExecute(gradeExec)
 {
     std::cout << "[AForm:: Constructor Parametric called]\n";
     if (this->_gradeToSign < 1)
