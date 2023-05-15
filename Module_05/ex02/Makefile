@@ -36,7 +36,7 @@ run:
 			./$(NAME)
 
 clean:
-			@$(RM) $(OBJ_DIR)
+			@$(RM) $(OBJ_DIR) *_shrubbery
 			@echo "$(GREEN)Object files removed $(RESET)"
 
 fclean:		clean
