@@ -6,11 +6,32 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:24:07 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/16 17:36:43 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:02:54 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Whatever.hpp"
+
+int main( void ) 
+{
+    int a = 2;
+    int b = 3;
+
+    ::swap( a, b );
+    std::cout << "a = " << a << ", b = " << b << std::endl;
+    std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
+    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+
+    std::string c = "chaine1";
+    std::string d = "chaine2";
+
+    ::swap(c, d);
+    std::cout << "c = " << c << ", d = " << d << std::endl;
+    std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
+    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+
+    return 0;
+}
 
 /*
 
@@ -50,6 +71,8 @@ int main( void )
 }
 
 */
+
+/*
 
 int main(void)
 {
@@ -115,3 +138,5 @@ int main(void)
     std::cout << "max( c, d ) = " << ::max(c, d) << std::endl;
     return (0);
 }
+
+*/
