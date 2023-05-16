@@ -4,13 +4,13 @@ SOURCE_DIR		=	./
 
 OBJ_DIR			=	objects
 
-HEADERS			=	Whatever.hpp
+HEADERS			=	Iter.hpp
 
 SOURCES			=	$(addprefix $(SOURCE_DIR)/, $(SOURCE_FILES))
 
 OBJECTS			=	$(SOURCES:$(SOURCE_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-NAME			=	whatever
+NAME			=	iter
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
