@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:49:26 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/16 20:30:42 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:54:32 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int main( void )
 
 		std::cout << std::endl << "Int   array: ";
 
-		iter(array, length, printArray<int>);
+		iter(array, length, printArray<int>); //chamou explicitamente
 
 		std::cout << std::endl;
 	}
@@ -61,7 +61,7 @@ int main( void )
 
 		std::cout << std::endl << "Float array: ";
 
-		iter(array, length, printArray<float>);
+		iter(array, length, printArray); //chamou implicitamente
 
   		std::cout << std::endl;
 	}
