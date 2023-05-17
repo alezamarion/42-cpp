@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:24:07 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/17 08:13:11 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/17 08:20:18 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ int main( void )
 
     ::swap( a, b );
     std::cout << "a = " << a << ", b = " << b << std::endl;
-    std::cout << "min<int>( a, b ) = " << ::min<int>( a, b ) << std::endl; //explicit instantiation -> preferred
-    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl; // implicit instantiation -> it might not work for complex classes
+ 
+    //explicit instantiation -> preferred
+    std::cout << "min<int>( a, b ) = " << ::min<int>( a, b ) << std::endl; 
+    // implicit instantiation -> it might not work for complex classes
+    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl; 
 
     std::string c = "chaine1";
     std::string d = "chaine2";
