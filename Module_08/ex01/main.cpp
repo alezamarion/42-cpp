@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:33:21 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/18 15:40:39 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:58:24 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,22 @@
 
 #include "Span.hpp"
 
+int main()
+{
+    Span sp = Span(5);
+    sp.addNumber(6);
+    sp.addNumber(3);
+    sp.addNumber(17);
+    sp.addNumber(9);
+    sp.addNumber(11);
+    std::cout << sp.shortestSpan() << std::endl;
+    std::cout << sp.longestSpan() << std::endl;
+    
+    return 0;
+}
 
+
+/*
 int main()
 {
     Span sp1 = Span(10000);
@@ -97,7 +112,7 @@ int main()
     return 0;
 }
 
-
+*/
 /*
 int main()
 {
