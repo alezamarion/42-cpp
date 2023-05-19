@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:55:03 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/18 15:02:59 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:18:24 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int main(void)
     return (0);
 }
 */
-/*
+
 
 #define MAX_VAL 750
 int main(int, char**)
@@ -192,7 +192,7 @@ int main(int, char**)
     return 0;
 }
 
-*/
+
 
 
 
@@ -258,7 +258,7 @@ int main(void)
 
 // #include <iostream>
 // #include <Array.hpp>
-*/
+*//*
 
 #define MAX_VAL 750
 int main(int, char**)
@@ -310,3 +310,4 @@ int main(int, char**)
     delete [] mirror;//
     return 0;
 }
+*/

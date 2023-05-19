@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:55:06 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/18 14:52:08 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:18:58 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ class Array
         Array<T>& operator=(const Array<T>& rhs)
         {
             if(this->_size)
-                delete this->_ptr;
+                delete[] this->_ptr;
             this->_size = rhs.size();
             if(this->_size)
                 this->_ptr = new T[this->_size];
