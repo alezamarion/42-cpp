@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:55:03 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/19 13:18:24 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:57:31 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int main(void)
 */
 
 
-#define MAX_VAL 750
+#define MAX_VAL 750 //#define
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);

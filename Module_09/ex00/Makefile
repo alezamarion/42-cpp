@@ -1,16 +1,16 @@
-SOURCE_FILES	=	main.cpp Span.cpp
+SOURCE_FILES	=	main.cpp BitcoinExchange.cpp
 
 SOURCE_DIR		=	./
 
 OBJ_DIR			=	objects
 
-HEADERS			=	Span.hpp Span.tpp
+HEADERS			=	BitcoinExchange.hpp
 
 SOURCES			=	$(addprefix $(SOURCE_DIR)/, $(SOURCE_FILES))
 
 OBJECTS			=	$(SOURCES:$(SOURCE_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-NAME			=	span
+NAME			=	btc
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
@@ -35,8 +35,8 @@ $(OBJ_DIR):
 run:
 			./$(NAME)
 
-runv:               all
-                    valgrind -q --leak-check=full --show-leak-kinds=all -s --track-origins=yes ./span
+runv:		all
+			valgrind -q --leak-check=full --show-leak-kinds=all -s --track-origins=yes ./btc
 
 clean:
 			@$(RM) $(OBJ_DIR)
