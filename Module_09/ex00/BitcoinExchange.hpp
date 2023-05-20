@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:13:30 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/20 08:53:20 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/20 19:21:05 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ struct BitcoinExchange
 void        bitcoinExchange(std::string csvFile, std::string txtFile);
 void        getBitcoinData(BitcoinExchange &bitcoinData, std::string file);
 void        readInputAndExchangeData(BitcoinExchange &bitcoinData, std::string file);
-double      exchangeRate(BitcoinExchange &bitcoinData, std::string date);
+double      exchangeRate(BitcoinExchange bitcoinData, std::string date);
 std::string pastDate(std::string date);
 bool        ValidDate(const std::string &date);
 

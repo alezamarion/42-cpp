@@ -6,62 +6,61 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 07:54:30 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/20 09:18:12 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/20 19:48:17 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-void        bitcoinExchange(std::string csvFile, std::string txtFile)
+void bitcoinExchange( std::string csvFileName, std::string txtFileName )
 {
     BitcoinExchange bitcoinData;
-    
-    getBitcoinData(bitcoinData, csvFile);
-    readInputAndExchangeData(bitcoinData, txtFile);
+
+    getBitcoinData(bitcoinData, csvFileName);
+    readInputAndExchangeData(bitcoinData, txtFileName);
 }
 
-void        getBitcoinData(BitcoinExchange &bitcoinData, std::string csvFile)
+void getBitcoinData( BitcoinExchange &bitcoinData, std::string fileName )
 {
     std::ifstream file;
     std::string line;
 
-    file.open(csvFile.c_str());
+    file.open(fileName.c_str());
     getline(file, line);
 
-    while(getline(file, line))
+    while (getline(file, line))
     {
-        std::istringstream stringStream;
-        std::string date;
-        double value;
+        std::istringstream  stringStream;
+        std::string         date;
+        double              value;
 
         stringStream.str(line);
-        getline(stringStream, date, ' ');
+        getline(stringStream, date, ',');
         stringStream >> value;
-
         bitcoinData._map.insert(std::make_pair(date, value));
     }
 }
 
-void        readInputAndExchangeData(BitcoinExchange &bitcoinData, std::string txtFile)
+void readInputAndExchangeData( BitcoinExchange &bitcoinData, std::string fileName )
 {
-    std::ifstream file;
-    std::string line;
+    std::ifstream   file;
+    std::string     line;
 
-    file.open(txtFile.c_str());
+    file.open(fileName.c_str());
     getline(file, line);
 
     if (!(line == "date | value"))
     {
-        std::cout << "Error: bad input | " << line << " |\n";
-        return;
+        std::cout << "Error: bad input => \"" << line << "\"" << std::endl;
+        return ;
     }
     while (getline(file, line))
     {
         std::string delimiter = " | ";
         std::string date;
         std::string stringValue;
-        
-        size_t pos = line.find(delimiter);
+    
+        size_t pos = line.find(delimiter);  
         if (pos == 10)
         {
             date = line.substr(0, pos);
@@ -71,21 +70,21 @@ void        readInputAndExchangeData(BitcoinExchange &bitcoinData, std::string t
         {
             date = line;
             stringValue = "";
-        }
-        
+        }   
+
         double value = std::atof(stringValue.c_str());
         if (value > 1000)
-            std::cout << "Error: too large number\n"; 
+            std::cout << "Error: too large number" << std::endl;
         else if (pos != 10 || !ValidDate(date))
-            std::cout << "Error: bad input | " << date << " |\n";
+            std::cout << "Error: bad input => | " << date << " |" << std::endl;
         else if (value < 0)
-            std::cout << "Error: not a positive number\n";
+            std::cout << "Error: not a positive number" << std::endl;
         else
-            std::cout << date << " | " << value << " = " << value * exchangeRate(bitcoinData, date) << std::endl;      
-    } 
+            std::cout << date << " => " << value << " = " << value * exchangeRate(bitcoinData, date) << std::endl;
+    }
 }
 
-double      exchangeRate(BitcoinExchange &bitcoinData, std::string date)
+double exchangeRate(BitcoinExchange bitcoinData, std::string date)
 {
     std::map<std::string, double>::iterator it = bitcoinData._map.find(date);
 
@@ -94,11 +93,11 @@ double      exchangeRate(BitcoinExchange &bitcoinData, std::string date)
     else
     {
         date = pastDate(date);
-        return exchangeRate(bitcoinData, date);    
+        return (exchangeRate(bitcoinData, date));
     }
 }
 
-std::string pastDate(std::string date)
+std::string pastDate( std::string date )
 {
     int year = atoi(date.substr(0, 4).c_str());
     int month = atoi(date.substr(5, 2).c_str());
@@ -109,7 +108,7 @@ std::string pastDate(std::string date)
         if (month == 1)
         {
             month = 12;
-            year--;
+            year--;  
         }
         else if (month == 4 || month == 6 || month == 9 || month == 11)
         {
@@ -128,28 +127,27 @@ std::string pastDate(std::string date)
         {
             month--;
             day = 30;
-        }        
+        }
     }
     else
         day--;
 
-    std::stringstream ss;
-
-    ss << std::setw(4) << std::setfill('0') << year << "-"
+    std::stringstream str;
+    str << std::setw(4) << std::setfill('0') << year << "-"
         << std::setw(2) << std::setfill('0') << month << "-"
         << std::setw(2) << std::setfill('0') << day;
 
-    date = ss.str();
-    return (date);     
+    date = str.str();
+    return (date);
 }
 
-bool ValidDate(const std::string &date)
+bool ValidDate( const std::string &date )
 {
     if (date.length() != 10)
-        return (false);
+        return false;
     if (date[4] != '-' || date[7] != '-')
-        return (false);
-    
+        return false;
+
     int year = atoi(date.substr(0, 4).c_str());
     int month = atoi(date.substr(5, 2).c_str());
     int day = atoi(date.substr(8, 2).c_str());
@@ -165,7 +163,7 @@ bool ValidDate(const std::string &date)
     if (month == 2)
     {
         if (day > 29)
-            return (false);       
+            return (false);
         if (day == 29 && (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)))
             return (false);
     }
