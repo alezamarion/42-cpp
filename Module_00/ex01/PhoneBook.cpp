@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:03:47 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/06 23:49:23 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:04:11 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void PhoneBook::addContact(std::string firstName, std::string lastName, std::str
                                             this->_count++;
                                     this->_index++;
                                     if (this->_index >= 8)
-                                            this->_index %= 8;
+                                            this->_index %= 8; //indice retorna para zero
                             }
 
 void PhoneBook::printOneContact(Contact contact)
@@ -50,7 +50,7 @@ void PhoneBook::printOneContact(Contact contact)
 void PhoneBook::formatPrinting(std::string str)
 {
     if (str.length() > 9)
-        std::cout << std::right << std::setw(10) << str.substr(0, 9) + '.';
+        std::cout << std::right << std::setw(10) << str.substr(0, 9) + '.'; //alinha à direita | width 10 chars | extrai uma substring
     else
         std::cout << std::right << std::setw(10) << str;
 }

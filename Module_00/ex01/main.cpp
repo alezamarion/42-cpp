@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:03:52 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/06 23:28:29 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:17:15 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@
 
 bool fieldValidation(std::string input, std::string fieldName)
 {
+    bool onlyNewline = true;
+    
+    for (std::string::iterator i = input.begin(); i != input.end(); ++i)
+    {
+        if (*i != '\n')
+        {
+            onlyNewline = false;
+            break;
+        }
+    }
+    if (onlyNewline)
+    {
+        std::cout << "Empty field not allowed: " << fieldName << "\n\n";    
+        return (false);
+    }
     for(std::string::iterator i = input.begin(); i != input.end(); ++i)
     {
         if (!std::isalnum(*i))
@@ -29,6 +44,21 @@ bool fieldValidation(std::string input, std::string fieldName)
 
 bool phoneValidation(std::string input, std::string fieldName)
 {
+    bool onlyNewline = true;
+    
+    for (std::string::iterator i = input.begin(); i != input.end(); ++i)
+    {
+        if (*i != '\n')
+        {
+            onlyNewline = false;
+            break;
+        }
+    }
+    if (onlyNewline)
+    {
+        std::cout << "Empty field not allowed: " << fieldName << "\n\n";    
+        return (false);
+    }
     for(std::string::iterator i = input.begin(); i != input.end(); ++i)
     {
         if (!std::isdigit(*i))
@@ -48,7 +78,7 @@ void addContact(PhoneBook &objPhoneBook)
     std::string phoneNumber;
     std::string darkestSecret;
 
-    std::cin.ignore();
+    std::cin.ignore(); //clear input buffer - This function is commonly used to handle scenarios where there is unwanted input remaining in the buffer
     std::cout << "Input First Name: " << std::endl;
     std::getline(std::cin, firstName);
     if(!fieldValidation(firstName, "First Name"))
@@ -81,14 +111,14 @@ void searchContact(PhoneBook objPhoneBook)
 
     if(objPhoneBook.getContactCount() == 0)
     {
-        std::cout << "Phonebook is empty." << std::endl;
+        std::cout << "\nPhonebook is empty\n" << std::endl;
         return;
     }
     objPhoneBook.printAllContacts();
-    std::cout << "Choose a contact by index: " << std::endl;
+    std::cout << "\nChoose a contact by index: " << std::endl;
     std::cin >> option;
     ss << option;
-    ss >> index;
+    ss >> index; //This effectively converts the user's input from a string to an integer.
     objPhoneBook.searchContact(index - 1);
 }
 
@@ -99,7 +129,7 @@ int main(void)
 
     while (1)
     {
-        std::cout << "Choose one option: " << std::endl;
+        std::cout << "\nChoose one option: " << std::endl;
         std::cout << "Option: ADD | SEARCH | EXIT" << std::endl;
         std::cin >> option;
 
