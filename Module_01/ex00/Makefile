@@ -1,4 +1,4 @@
-SOURCE_FILES	=	main.cpp Zombie.cpp
+SOURCE_FILES	=	main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 
 SOURCE_DIR		=	./
 
