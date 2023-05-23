@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:30:34 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/07 17:35:39 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:28:29 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class HumanB
 
     private:
         std::string _name;
-        Weapon *_weapon; //no HumanA é uma referência
+        Weapon *_weapon;
 };
 
 #endif
