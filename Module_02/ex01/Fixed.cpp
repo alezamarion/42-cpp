@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:04:03 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/08 11:11:57 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:25:52 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,31 @@ Fixed::Fixed(Fixed const &src)
 	return;
 }
 
+/* Constructor converts an integer to the corresponding fixed-point value 
+	It performs a bitwise left shift operation (<<) on the n value by _fractionalBits number of bits.
+	The purpose of this bitwise shift operation is to convert the n value from an integer representation to a 
+	fixed-point representation, where _fractionalBits represents the number of fractional bits used for representing 
+	the decimal portion of the value. By shifting the bits to the left, the integer value is effectively multiplied 
+	by 2 raised to the power of _fractionalBits.
+	For example, if _fractionalBits is 8 and n is 5, the line this->_rawBits = n << _fractionalBits; would set 
+	_rawBits to 1280 (binary: 00000101 shifted left by 8 bits becomes 10100000000). */
+	
 Fixed::Fixed(int const n)
 {
     std::cout << "Int constructor called" << std::endl;
     this->_rawBits = n << _fractionalBits;
 }
 
+/* This code constructs an object of the Fixed class with a float input, scaling and rounding the input value to fit a 
+	fixed-point representation stored in the _rawBits member variable.
+	a. 1 << _fractionalBits: This shifts the value 1 to the left by _fractionalBits number of bits.
+		The _fractionalBits represents the number of fractional bits in the fixed-point representation.
+	b. f * (1 << _fractionalBits): This multiplies the float value f by the value obtained from step (a).
+		It scales the float value to fit the desired fixed-point representation.
+	c. roundf(f * (1 << _fractionalBits)): This rounds the scaled value obtained from step (b) to the nearest integer.
+	d. static_cast<int>(roundf(f * (1 << _fractionalBits))): This casts the rounded value to an int type.
+		It discards any decimal portion of the value, as the _rawBits variable is assumed to be of integer type.
+	e. this->_rawBits = ...: This assigns the resulting integer value to the _rawBits member variable of the Fixed class */
 Fixed::Fixed(float const f)
 {
     std::cout << "Float constructor called" << std::endl;
