@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:19:32 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/08 20:57:44 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:42:38 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ class ClapTrap
 
     private:
         std::string const _name;
-        unsigned int _hitPoint;
-        unsigned int _energyPoint;
+        unsigned int _hitPoints;
+        unsigned int _energyPoints;
         unsigned int _attackDamage;            
 };
 

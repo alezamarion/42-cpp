@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:03:47 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/22 12:04:11 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:33:33 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void PhoneBook::searchContact(int index)
         printOneContact(this->_contacts[index]);
     else
         std::cout << "Invalid Index!" << std::endl;
-        this->_index = index;
 }
 
 int  PhoneBook::getContactCount(void)

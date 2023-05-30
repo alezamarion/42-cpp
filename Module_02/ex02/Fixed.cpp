@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:18:51 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/08 11:21:49 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:35:30 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,9 @@ Fixed const &Fixed::max(Fixed const &lhs, Fixed const &rhs)
 {
 	std::cout << "const &Fixed::max member function called" << std::endl;
 	if(lhs.getRawBits() > rhs.getRawBits())
-		return (lhs);						// lhs = "left-hand side" (lado direito).
+		return (lhs);
 	else
-		return(rhs);						// rhs = "right-hand side" (lado esquerdo).
+		return(rhs);
 }
 
 int Fixed::getRawBits(void) const

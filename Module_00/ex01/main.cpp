@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:03:52 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/22 12:17:15 by azamario         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:35:19 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,11 @@ int main(void)
             searchContact(objPhoneBook);
         else if (option == "EXIT")
             break;
+ 		else if (std::cin.eof())
+		{
+         	std::cout << "\nCTRL + D not allowed | Invalid option\n" << std::endl;
+			break;
+		}           
         else
             std::cout << "Invalid option" << std::endl;
     }
