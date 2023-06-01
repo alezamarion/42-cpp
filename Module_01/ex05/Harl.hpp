@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 21:19:21 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/07 21:35:54 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/01 20:43:27 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 class Harl
 {
     public:
-        Harl() {}
-        ~Harl() {}
+        Harl(void);
+        ~Harl(void);
         void complain(std::string level);
 
     private:
