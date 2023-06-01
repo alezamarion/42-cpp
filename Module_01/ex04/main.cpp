@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 21:06:47 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/23 17:58:43 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/01 13:17:25 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ bool fileInValidation(std::ifstream &fileIn, char *file)
 		std::cerr << "Failed to open: " << file << std::endl;
 		return (false);
 	}
+	if (fileIn.peek() == std::ifstream::traits_type::eof())
+	{
+        std::cout << "\nThe file is empty.\n" << std::endl;
+		return (false);
+    } 
 	return(true);
 }
 
