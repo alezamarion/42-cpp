@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:33:35 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/07 16:37:04 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/01 20:08:57 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,14 @@ void Zombie::announce(void)
 void Zombie::setName(std::string name)
 {
    this->_name = name;
+}
+
+Zombie::Zombie(void)
+{
+    return;
+}
+
+Zombie::~Zombie(void)
+{
+    std::cout << _name << " Arghhhh \033[0;31mdead :(\033[0m" << std::endl;
 }
