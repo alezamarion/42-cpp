@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 21:23:37 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/01 20:42:48 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:36:48 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ void Harl::complain(std::string level)
             return;
         }
     }
+    std::cout <<
+	"\nNo complains, I'm happy! :D\n" << std::endl;
     return;
 }
