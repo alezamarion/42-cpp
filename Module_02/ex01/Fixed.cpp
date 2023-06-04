@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:04:03 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/25 12:25:52 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:13:42 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@ Fixed::Fixed(Fixed const &src)
 	It performs a bitwise left shift operation (<<) on the n value by _fractionalBits number of bits.
 	The purpose of this bitwise shift operation is to convert the n value from an integer representation to a 
 	fixed-point representation, where _fractionalBits represents the number of fractional bits used for representing 
-	the decimal portion of the value. By shifting the bits to the left, the integer value is effectively multiplied 
-	by 2 raised to the power of _fractionalBits.
-	For example, if _fractionalBits is 8 and n is 5, the line this->_rawBits = n << _fractionalBits; would set 
-	_rawBits to 1280 (binary: 00000101 shifted left by 8 bits becomes 10100000000). */
+	the decimal portion of the value. */
 	
 Fixed::Fixed(int const n)
 {
     std::cout << "Int constructor called" << std::endl;
-    this->_rawBits = n << _fractionalBits;
+    /* The purpose of this operation is to convert the int value n into the fixed-point representation by shifting it 
+		to the left by _fractionalBits positions. It performs a bitwise left shift operation on the n value. 
+		Shifting n to the left by _fractionalBits positions effectively multiplies n by 2^_fractionalBits. 
+	*/
+	this->_rawBits = n << _fractionalBits;
 }
 
 /* This code constructs an object of the Fixed class with a float input, scaling and rounding the input value to fit a 
@@ -83,11 +84,30 @@ void Fixed::setRawBits(int const raw)
 	return;
 }
 
+/* Used to convert a fixed-point value back to its corresponding integer representation.
+   In binary representation, shifting a number to the right by one position is equivalent to dividing it by 2. 
+   Similarly, shifting it by _fractionalBits positions is equivalent to dividing it by 2^_fractionalBits. 
+   By performing this right shift operation, the code effectively scales down the fixed-point value to obtain the 
+   	corresponding integer value. 
+*/
 int Fixed::toInt(void) const
 {
     return (this->_rawBits >> _fractionalBits);
 }
 
+/* Converts a fixed-point value to its floating-point representation by dividing the internal representation of the value 
+	by the appropriate scale factor. This allows for obtaining the corresponding floating-point value from a fixed-point value.
+   - this->_rawBits represents the internal storage of the fixed-point value in the Fixed class. It contains both the integer 
+   		and fractional parts of the value. The _fractionalBits variable determines the position of the binary point, indicating 
+		the number of bits allocated for the fractional part.
+   - The expression static_cast<float>(this->_rawBits) converts the _rawBits value to a float type. This is done to ensure that 
+   		the division operation that follows is performed using floating-point arithmetic rather than integer arithmetic.
+   - The line (1 << _fractionalBits) calculates 2^_fractionalBits, which corresponds to shifting the value 1 left by _fractionalBits positions. 
+   		This effectively represents the scale factor required to convert the fixed-point value to a floating-point value.
+   - Finally, the expression (static_cast<float>(this->_rawBits) / (1 << _fractionalBits)) divides the converted _rawBits value by the scale factor. 
+   		This division operation results in the floating-point representation of the fixed-point value. The division is performed using floating-point 
+		arithmetic, allowing for the fractional part of the fixed-point value to be accurately represented in the resulting float value.
+*/
 float Fixed::toFloat(void) const
 {
     return (static_cast<float>(this->_rawBits) / (1 << _fractionalBits));

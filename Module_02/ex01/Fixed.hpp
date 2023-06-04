@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:03:37 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/08 11:03:39 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/04 12:42:48 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,7 @@
 
 /**
  * @brief 
- * Fixed(Fixed const &src) é o construtor de cópia que recebe um objeto Fixed como parâmetro.
-   Fixed(int const n) é um construtor explícito que recebe um inteiro como parâmetro.
-   Fixed(float const f) é um construtor explícito que recebe um número de ponto flutuante como parâmetro.
-   ~Fixed() é o destrutor que libera qualquer recurso alocado pela classe.
-   operator= é o operador de atribuição que recebe um objeto Fixed como parâmetro e retorna uma referência a um objeto Fixed.
-   getRawBits() retorna o valor inteiro dos bits brutos armazenados na classe.
-   setRawBits(int const raw) define os bits brutos armazenados na classe para um valor inteiro fornecido.
+ * setRawBits(int const raw) define os bits brutos armazenados na classe para um valor inteiro fornecido.
    toFloat() retorna o valor do número de ponto fixo como um número de ponto flutuante.
    toInt() retorna o valor do número de ponto fixo como um inteiro.
  
