@@ -6,12 +6,12 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:53:48 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/09 13:54:58 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:50:49 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
-#include "FlagTrap.hpp"
+#include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
 int main(void)
@@ -38,7 +38,7 @@ int main(void)
 
     fragTrap.attack(scavTrap.getName());
     scavTrap.takeDamage(fragTrap.getAD());
-    fragTrap.highFiveGuys();
+    fragTrap.highFivesGuys();
     fragTrap.beRepaired(40);
     std::cout << "\n";
 

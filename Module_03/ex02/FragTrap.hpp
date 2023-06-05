@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FlagTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:51:45 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/09 13:52:11 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:49:19 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ class FragTrap: public ClapTrap
 
         FragTrap &operator=(FragTrap const &rhs);
 
-        void highFiveGuys(void);
+        void highFivesGuys(void);
 };
 #endif

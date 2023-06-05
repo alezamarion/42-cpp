@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FlagTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:52:25 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/09 13:53:36 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:49:37 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FlagTrap.hpp"
+#include "FragTrap.hpp"
 
 FragTrap::FragTrap(void) : ClapTrap()
 {
     std::cout << "FragTrap defaut constructor called\n";
     this->setName("FragTrap");
-    this->setHP(100);
+    this->setClassName("FragTrap");
+	this->setHP(100);
     this->setEP(100);
     this->setAD(30);
     return;
@@ -24,8 +25,9 @@ FragTrap::FragTrap(void) : ClapTrap()
 
 FragTrap::FragTrap(std::string const name) : ClapTrap(name)
 {
-    std::cout << "FragTrap assignment constructor called\n";
-    this->setHP(100);
+    std::cout << "FragTrap parametric constructor called\n";
+    this->setClassName("FragTrap");
+	this->setHP(100);
     this->setEP(100);
     this->setAD(30);
     return;
@@ -40,7 +42,7 @@ FragTrap::FragTrap(FragTrap const &src) : ClapTrap()
 
 FragTrap::~FragTrap(void)
 {
-    std::cout << "FlagTrap Destructor called\n";
+    std::cout << "FragTrap Destructor called\n";
     return;
 }
 
@@ -54,11 +56,11 @@ FragTrap &FragTrap::operator=(FragTrap const &rhs)
     return (*this);
 }
 
-void FragTrap::highFiveGuys(void)
+void FragTrap::highFivesGuys(void)
 {
     if(this->getHP() == 0)
     {
-        std::cout << this->getName()
+        std::cout << this->getClassName() << " " << this->getName()
                   << " is dead!. He cannot be display a positive high fives\n";
         return;
     }

@@ -1,16 +1,16 @@
-SOURCE_FILES	=	main.cpp ClapTrap.cpp ScavTrap.cpp FlagTrap.cpp
+SOURCE_FILES	=	main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 
 SOURCE_DIR		=	./
 
 OBJ_DIR			=	objects
 
-HEADERS			=	ClapTrap.hpp ScavTrap.hpp FlagTrap.hpp
+HEADERS			=	ClapTrap.hpp ScavTrap.hpp FragTrap.hpp
 
 SOURCES			=	$(addprefix $(SOURCE_DIR)/, $(SOURCE_FILES))
 
 OBJECTS			=	$(SOURCES:$(SOURCE_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-NAME			=	flagtrap
+NAME			=	fragtrap
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
@@ -34,6 +34,9 @@ $(OBJ_DIR):
 
 run:
 			./$(NAME)
+
+runv:		all
+			valgrind -q --leak-check=full --show-leak-kinds=all -s --track-origins=yes ./$(NAME)
 
 clean:
 			@$(RM) $(OBJ_DIR)
