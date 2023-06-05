@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 21:30:38 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/08 21:40:29 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:30:43 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ ScavTrap::ScavTrap(void) : ClapTrap()
 {
     std::cout << "ScavTrap default constructor called" << std::endl;
     this->setName("ScavTrap");
-    this->setHP(100);
+    this->setClassName("ScavTrap");
+	this->setHP(100);
     this->setEP(50);
     this->setAD(20);
     return;    
@@ -25,7 +26,8 @@ ScavTrap::ScavTrap(void) : ClapTrap()
 ScavTrap::ScavTrap(std::string const name) : ClapTrap(name)
 {
     std::cout << "ScavTrap assignment constructor called" << std::endl;
-    this->setHP(100);
+    this->setClassName("ScavTrap");
+	this->setHP(100);
     this->setEP(50);
     this->setAD(20);
     return;    
@@ -54,28 +56,27 @@ ScavTrap &ScavTrap::operator=(ScavTrap const &rhs)
     return (*this);    
 }
 
-void ScavTrap::attack(const std::string &target)
+void ScavTrap::attack(const std::string& target)
 {
     if (this->getHP() == 0)
     {
-        std::cout << this->getName()
-                  << " is dead!. He cannot not attack "
+        std::cout << this->getClassName() << " " << this->getName()
+                  << " is dead!. He cannot not attack"
                   << target << std::endl;
         return;
-
     }
     if (this->getEP() == 0)
     {
-        std::cout << "No energy remainig! "
-                  << this->getName()
+        std::cout << "No energy remainig!"
+                  << this->getClassName() << " " << this->getName()
                   << " cannot attacks!" << target << std::endl;
         return;
     }
-    std::cout << this->getName()
+    std::cout << this->getClassName() << " " << this->getName()
               << " attacks " << target
               << " causing " << this->getAD() 
-              << " points of damage!" << std::endl;
-    this->_energyPoint--;    
+              << "points of damage!" << std::endl;
+    this->_energyPoint--;   
 }
 
 void ScavTrap::guardGate(void) const
@@ -86,4 +87,4 @@ void ScavTrap::guardGate(void) const
         return;
     }
     std::cout << "ScavTrap " << this->getName() << " is now Gate Keeper mode" << std::endl;    
-}      
+}

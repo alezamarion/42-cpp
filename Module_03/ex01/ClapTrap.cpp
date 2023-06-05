@@ -6,21 +6,21 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 21:25:04 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/08 21:25:06 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:30:22 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void): _name("ClapTrap"), _hitPoint(10), _energyPoint(10), _attackDamage(0)
+ClapTrap::ClapTrap(void): _name("ClapTrap"), _className("ClapTrap"), _hitPoint(10), _energyPoint(10), _attackDamage(0)
 {
     std::cout << "Default constructor called" << std::endl;
     return;
 }
 
-ClapTrap::ClapTrap(std::string const name) :_name(name), _hitPoint(10), _energyPoint(10), _attackDamage(0)
+ClapTrap::ClapTrap(std::string const name) :_name(name), _className("ClapTrap"), _hitPoint(10), _energyPoint(10), _attackDamage(0)
 {
-    std::cout << "Parametric constructor called" << std::endl;
+    std::cout << "ClapTrap Parametric constructor called" << std::endl;
     return;
 }
 
@@ -33,7 +33,7 @@ ClapTrap::ClapTrap(ClapTrap const &src)
 
 ClapTrap::~ClapTrap(void)
 {
-    std::cout << "Destructor called" << std::endl;
+    std::cout << "ClapTrap Destructor called" << std::endl;
     return;
 }
 
@@ -50,6 +50,11 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &rhs)
 std::string ClapTrap::getName(void) const
 {
     return (this->_name);
+}
+
+std::string ClapTrap::getClassName(void) const
+{
+	return (this->_className);
 }
 
 unsigned int ClapTrap::getHP(void) const
@@ -72,6 +77,11 @@ void ClapTrap::setName(std::string const &name)
     const_cast<std::string &>(this->_name) = name;
 }
 
+void ClapTrap::setClassName(std::string const &className)
+{
+	const_cast<std::string &>(this->_className) = className;
+}
+
 void ClapTrap::setHP(unsigned int hitPoints)
 {
     this->_hitPoint = hitPoints;   
@@ -90,7 +100,7 @@ void ClapTrap::attack(const std::string& target)
 {
     if (this->getHP() == 0)
     {
-        std::cout << "ClapTrap " << this->getName()
+        std::cout << this->getClassName() << " " << this->getName()
                   << " is dead!. He cannot not attack"
                   << target << std::endl;
         return;
@@ -98,11 +108,11 @@ void ClapTrap::attack(const std::string& target)
     if (this->getEP() == 0)
     {
         std::cout << "No energy remainig!"
-                  << "ClapTrap " << this->getName()
+                  << this->getClassName() << " " << this->getName()
                   << " cannot attacks!" << target << std::endl;
         return;
     }
-    std::cout << "ClapTrap " << this->getName()
+    std::cout << this->getClassName() << " " << this->getName()
               << " attacks " << target
               << " causing " << this->getAD() 
               << "points of damage!" << std::endl;
@@ -113,41 +123,39 @@ void ClapTrap::takeDamage(unsigned int amount)
 {
     if (this->getHP() == 0)
     {
-         std::cout << "ClapTrap " << this->getName()
+        std::cout << this->getClassName() << " " << this->getName()
                   << " is dead!. He cannot suffer damage" << std::endl;
         return;
     }
-    std::cout << "ClapTrap "
-            << this->getName()
-            << " suffered "
-            << amount << " points of damage!\n";
+    std::cout << this->getClassName() << " " << this->getName()
+              << " suffered " << amount << " points of damage!\n";
     if (this->_hitPoint <= amount)
         this->_hitPoint = 0;
     else 
         this->_hitPoint -= amount;
-    if(this->getHP() <= 0)
+    if (this->getHP() <= 0)
     {
-        std::cout << "ClapTrap " << this->getName()
+        std::cout << this->getClassName() << " " << this->getName()
                   << " has died!" << std::endl;   
     }  
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if(this->getHP() == 0)
+    if (this->getHP() == 0)
     {
-         std::cout << "ClapTrap " << this->getName()
+        std::cout << this->getClassName() << " " << this->getName()
                   << " is dead!. He cannot be repaired" << std::endl;
         return;
     }
-    if(this->getEP() == 0)
+    if (this->getEP() == 0)
     {
-         std::cout << "No energy remainig!"
-                  << "ClapTrap " << this->getName()
+        std::cout << "No energy remainig!"
+                  << this->getClassName() << " " << this->getName()
                   << " cannot be repaired!" <<std::endl;
         return;
     }
-    std::cout << "ClapTrap " << this->getName()
+    std::cout << this->getClassName() << " " << this->getName()
               << " recovered " << amount
               << " points of hit points!\n";
     if (this->_hitPoint + amount > 10)
@@ -159,9 +167,10 @@ void ClapTrap::beRepaired(unsigned int amount)
             
 std::ostream &operator<<(std::ostream &out, ClapTrap const &in)
 {
-    out << "Name: " << in.getName() << "\n";
-    out << "HP: " << in.getHP() << "\n";
-    out << "EP: " << in.getEP() << "\n";
-    out << "AD: " << in.getAD() << "\n";
+    out << "Class: " << in.getClassName() << "\n";
+    out << "Name: "  << in.getName() << "\n";
+    out << "HP: "    << in.getHP() << "\n";
+    out << "EP: "    << in.getEP() << "\n";
+    out << "AD: "    << in.getAD() << "\n";
     return (out); 
 }
