@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 12:39:49 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/12 12:40:02 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:41:22 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ class Dog : public Animal
     public:
     Dog(void);
     Dog(Dog const &src);
-    virtual ~Dog();
+    ~Dog();
 
     Dog &operator=(Dog const &rhs);
 
-    void makeSound(void) const;
+    virtual void makeSound(void) const;
 
 };
 

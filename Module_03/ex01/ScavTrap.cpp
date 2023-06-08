@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 21:30:38 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/05 13:30:43 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:36:04 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ ScavTrap &ScavTrap::operator=(ScavTrap const &rhs)
 {
     std::cout << "ScavTrap copy assignment called" << std::endl;
     const_cast<std::string &> (this->_name) = rhs.getName();
-    this->_hitPoint = rhs.getHP();
-    this->_energyPoint = rhs.getEP();
+    this->_hitPoints = rhs.getHP();
+    this->_energyPoints = rhs.getEP();
     this->_attackDamage = rhs.getAD();
     return (*this);    
 }
@@ -76,7 +76,7 @@ void ScavTrap::attack(const std::string& target)
               << " attacks " << target
               << " causing " << this->getAD() 
               << "points of damage!" << std::endl;
-    this->_energyPoint--;   
+    this->_energyPoints--;   
 }
 
 void ScavTrap::guardGate(void) const

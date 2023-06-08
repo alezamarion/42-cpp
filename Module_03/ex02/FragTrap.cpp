@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:52:25 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/05 13:49:37 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:36:04 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ FragTrap &FragTrap::operator=(FragTrap const &rhs)
 {
     std::cout << " FragTrap Copy assignment operator called\n";
     const_cast<std::string &> (this->_name) = rhs.getName();
-    this->_hitPoint = rhs.getHP();
-    this->_energyPoint = rhs.getEP();
+    this->_hitPoints = rhs.getHP();
+    this->_energyPoints = rhs.getEP();
     this->_attackDamage = rhs.getAD();
     return (*this);
 }

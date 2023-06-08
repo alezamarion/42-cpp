@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:45:44 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/08 20:47:23 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:31:14 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,24 @@ int main(void)
 
     std::cout << "\n";
 
+    std::cout << clap1 << "\n";
+    std::cout << clap2 << "\n";
+	
     clap1.attack(clap2.getName());
-    clap2.takeDamage(clap1.getAD());
+	if (!((clap1.getEP()) <= 0))
+    	clap2.takeDamage(clap1.getAD());
+ 
     clap2.attack(clap1.getName());
+	if (!((clap2.getEP()) <= 0))
+    	clap1.takeDamage(clap2.getAD());
+
+    clap2.attack(clap1.getName());
+	if (!((clap2.getEP()) <= 0))
+    	clap1.takeDamage(clap2.getAD());
+			
+    std::cout << "\n";
+    std::cout << clap1 << "\n";
+    std::cout << clap2 << "\n";
 
     std::cout << "\n";
 

@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:22:12 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/04 13:20:57 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/05 21:16:19 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(void)
     std::cout << b << std::endl;
     std::cout << Fixed::max( a, b ) << std::endl;
 
-	std::cout << "\n";
+	  std::cout << "\n";
 	
     std::cout << "a: " << a << std::endl;
     std::cout << "b: " << b << std::endl;
@@ -38,14 +38,14 @@ int main(void)
     if (a != b)
 		std::cout << "a != b\n";
 
-	std::cout << "\n";
+	  std::cout << "\n";
 
     std::cout << "a + b:  " << a + b << std::endl;
     std::cout << "a - b:  " << a - b << std::endl;
     std::cout << "a * b:  " << a * b << std::endl;
     std::cout << "a / b:  " << a / b << std::endl;
 
-	std::cout << "\n";
+	  std::cout << "\n";
 		
     return 0;
 }
