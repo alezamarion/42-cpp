@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 12:39:49 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/12 13:13:37 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:35:03 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Dog : public Animal
         Dog &operator=(Dog const &rhs);
 
         Brain const *getBrain(void) const;
-        void makeSound(void) const;
+        virtual void makeSound(void) const;
     
     private:
         Brain* _brain;

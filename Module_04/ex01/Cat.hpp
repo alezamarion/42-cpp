@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 12:29:15 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/12 13:09:58 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:34:55 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Cat : public Animal
         Cat &operator=(Cat const &rhs);
     
         Brain const *getBrain(void) const;
-        void makeSound(void) const;
+        virtual void makeSound(void) const;
 
     private:
         Brain* _brain;

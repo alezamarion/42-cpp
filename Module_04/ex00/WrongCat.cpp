@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 12:54:09 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/12 12:54:38 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:29:35 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,4 @@ WrongCat &WrongCat::operator=(WrongCat const &rhs)
     std::cout << "WrongCat Assigment Operator called\n";
     this->_type = rhs.getType();
     return(*this);
-}
-
-void WrongCat::makeSound(void) const
-{
-    std::cout << "WrongCat ❌\n";
 }
