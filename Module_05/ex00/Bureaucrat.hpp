@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:00:25 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/15 11:00:49 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:04:05 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ class Bureaucrat
         };
         
     private:
-        std::string _name;
+        const std::string _name;
         int _grade;
 };
 

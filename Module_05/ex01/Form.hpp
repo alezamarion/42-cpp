@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:07:49 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/15 11:07:52 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:08:08 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ class Form
 
         class GradeTooHighException : public std::exception
         {
-          public:
-            const char* what(void) const throw();
+			public:
+            	const char* what(void) const throw();
         };
     
         class GradeTooLowException : public std::exception

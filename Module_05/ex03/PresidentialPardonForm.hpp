@@ -6,32 +6,28 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:17:32 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/15 11:36:55 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:15:42 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
 
 #include "AForm.hpp"
 
 class PresidentialPardonForm : public AForm
 {
+    public:
+        PresidentialPardonForm(void);
+        explicit PresidentialPardonForm(const std::string &target);
+        PresidentialPardonForm(const PresidentialPardonForm &src);
+        virtual ~PresidentialPardonForm(void);
 
-	private:
+        PresidentialPardonForm &operator=(const PresidentialPardonForm &rhs);
 
-		std::string _target;
+        const std::string &getTarget(void) const;
 
-	public:
-
-		PresidentialPardonForm( void );
-		PresidentialPardonForm( std::string target );
-		PresidentialPardonForm( const PresidentialPardonForm &source );
-		~PresidentialPardonForm( void );
-
-		PresidentialPardonForm &operator=( const PresidentialPardonForm &rhs );
-
-		bool execute( const Bureaucrat &executor ) const;
+        void execute(Bureaucrat const &executor) const;
 };
 
 #endif

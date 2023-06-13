@@ -6,60 +6,61 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:18:48 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/15 11:37:43 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:17:59 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm( void )
-  : AForm( "RobotomyRequestForm", 72, 45 ), _target( "Unknown" )
+RobotomyRequestForm::RobotomyRequestForm(void) : AForm()
 {
-  return ;
+    return;
 }
 
-RobotomyRequestForm::RobotomyRequestForm( std::string target )
-  : AForm( "RobotomyRequestForm", 72, 45 ), _target( target )
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
+    : AForm("Robotomy Request Form", 72, 45)
 {
-  return ;
+    this->setTarget(target);
 }
 
-RobotomyRequestForm::RobotomyRequestForm( const RobotomyRequestForm &source )
-  : AForm( "RobotomyRequestForm", 72, 45 )
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src) : AForm(src)
 {
-  *this = source;
-
-  return ;
+    *this = src;
 }
 
-RobotomyRequestForm::~RobotomyRequestForm( void )
+RobotomyRequestForm::~RobotomyRequestForm(void)
 {
-  return ;
+    return;
 }
 
-RobotomyRequestForm &RobotomyRequestForm::operator=( const RobotomyRequestForm &rhs )
+RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &rhs)
 {
-  if (this != &rhs)
-    _target = rhs._target;
-
-  return (*this);
+    this->_target = rhs._target;
+    return (*this);
 }
 
-bool RobotomyRequestForm::execute( const Bureaucrat &executor ) const
+const std::string &RobotomyRequestForm::getTarget(void) const
 {
-  if (AForm::execute(executor))
-  {
-    std::cout << "\n\nBzzZzttrrzZZz   BZzzrtZzZrrtZZztrrzz" << std::endl;
+    return (this->_target);
+}
 
-    srand((unsigned int)time(NULL));
-    
-    if (rand() % 2)
-      std::cout << _target << " has been robotomized successfully!" << std::endl;
-    else
-      std::cout << _target << "'s robotomy failed." << std::endl;
+void RobotomyRequestForm::execute(Bureaucrat const &executor) const
+{
+    unsigned int seed;
+    int randNum = rand_r(&seed) % (10);
 
-    return (true);
-  }
-
-  return (false);
+    if (this->getIsFormSigned() == false)
+        throw AForm::UnsignedFormException();
+    else if (executor.getGrade() > this->getGradeToExecute())
+        throw AForm::GradeTooLowException();
+    else if (executor.getGrade() <= this->getGradeToExecute() && randNum < 5)
+    {
+        std::cout << "zzzzzzzz\n";
+        std::cout << this->getTarget() << " has been robotomized sucessfully\n";
+    }
+    else if(executor.getGrade() <= this->getGradeToExecute() && randNum >= 5)
+    {
+        std::cout << "zzzzzzzz\n";
+        std::cout << this->getTarget() << " failed to be robotomized\n";
+    }
 }

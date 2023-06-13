@@ -6,59 +6,123 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:41:57 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/15 11:41:59 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:25:05 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+
+#include "AForm.hpp"
+#include "Bureaucrat.hpp"
 #include "Intern.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
-int	main( void )
+int main(void)
 {
-	
-	Bureaucrat	karen("Karen", 50);
-	Intern			someRandomIntern;
-	AForm				*presidentialPardonForm;
-	AForm				*robotomyRequestForm;
-	AForm 			*shrubberyCreationForm;
-	AForm				*fakeForm;
-	
-	std::cout << std::endl << std::endl;
+	Bureaucrat* b;
+  	Intern i;
+  	AForm* f;
 
-	presidentialPardonForm = someRandomIntern.makeForm("Presidential Pardon", "Trillian Astra");
+  	std::cout << "\nTESTE 1\n";
+  	try
+	{
+		b = new Bureaucrat("Kátia", 1);
+    	f = i.makeForm("Shrubbery Creation Form", "Katy");
+    	b->signForm(*f);
+    	std::cout << *f;
+    	b->executeForm(*f);
+    	delete b;
+    	delete f;
+  	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << "\n";
+  	}
 
-	robotomyRequestForm = someRandomIntern.makeForm("Robotomy Request", "Bender");
+  	std::cout << "\nTESTE 2\n";
+  	try
+	{
+    	b = new Bureaucrat("João", 1);
+    	f = i.makeForm("Robotomy Request Form", "Jhon");
+    	b->signForm(*f);
+    	std::cout << *f;
+    	b->executeForm(*f);
+    	delete b;
+    	delete f;
+  	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << "\n";
+  	}
 
-	shrubberyCreationForm = someRandomIntern.makeForm("Shrubbery Creation", "Arboreal");
+  	std::cout << "\nTESTE 3\n";
+  	try
+	{
+    	b = new Bureaucrat("Maria", 1);
+    	f = i.makeForm("Presidential Pardon Form", "Mary");
+    	b->signForm(*f);
+    	std::cout << *f;
+    	b->executeForm(*f);
+    	delete b;
+    	delete f;
+  	}
+	catch (std::exception& e)
+	{
+    	std::cerr << e.what() << "\n";
+  	}
 
-	fakeForm = someRandomIntern.makeForm("Fake Form", "Phony");
-	
-	std::cout << std::endl << std::endl;
+  	std::cout << "\nTESTE 4\n";
+  	try
+	{
+		b = new Bureaucrat("Carolina", 150);
+    	f = i.makeForm("Crazy Form", "Caroline");
+    	b->signForm(*f);
+    	std::cout << *f;
+    	b->executeForm(*f);
+    	delete b;
+    	delete f;
+  	}
+	catch (std::exception& e)
+	{
+    	std::cerr << e.what() << "\n";
+    	delete b;
+  	}
 
-	karen.executeForm(*presidentialPardonForm);
-	karen.signForm(*presidentialPardonForm);
-	karen.executeForm(*presidentialPardonForm);
+  	std::cout << "\nTESTE 5\n";
+  	try
+	{
+    	b = new Bureaucrat("Marco", 150);
+    	f = i.makeForm("Presidential Pardon Form", "Mark");
+    	b->signForm(*f);
+    	std::cout << *f;
+    	b->executeForm(*f);
+    	delete b;
+    	delete f;
+  	}
+	catch (std::exception& e)
+	{
+    	std::cerr << e.what() << "\n";
+  	}
 
-	std::cout << std::endl << std::endl;
+  	std::cout << "\nTESTE 6\n";
+  	try
+	{
+    	b = new Bureaucrat("Bob", 20);
+    	f = i.makeForm("Presidential Pardon Form", "Bobbie");
+    	b->signForm(*f);
+    	std::cout << *f;
+    	b->executeForm(*f);
+    	delete b;
+    	delete f;
+  	}
+	catch (std::exception& e)
+	{
+    	std::cerr << e.what() << "\n";
+  	}
 
-	karen.executeForm(*robotomyRequestForm);
-	karen.signForm(*robotomyRequestForm);
-	karen.executeForm(*robotomyRequestForm);
+  	std::cout << "\n";
 
-	std::cout << std::endl << std::endl;
-
-	karen.executeForm(*shrubberyCreationForm);
-	karen.signForm(*shrubberyCreationForm);
-	karen.executeForm(*shrubberyCreationForm);
-
-	std::cout << std::endl << std::endl;
-
-	delete presidentialPardonForm;
-	delete robotomyRequestForm;
-	delete shrubberyCreationForm;
-
-	if (fakeForm)
-		delete fakeForm;
-
-	return (0);
-
+  	return (0);
 }

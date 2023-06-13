@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:19:23 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/15 11:19:34 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:18:35 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@
 #include "AForm.hpp"
 #include <fstream>
 
-#define TREE " *      \n\
-              *o*     \n\
-             *o*o*    \n\
-            *o***o*   \n\
-           *o*****o*  \n\
-          **o*****o** \n\
-               ||     \n\
-             ======   \n" 
-            
 class ShrubberyCreationForm : public AForm
 {
     public:
@@ -37,7 +28,7 @@ class ShrubberyCreationForm : public AForm
 
     const std::string &getTarget(void) const;
 
-    void execute(const Bureaucrat &exe) const;
+    void execute(Bureaucrat const &executor) const;
 };
 
 #endif

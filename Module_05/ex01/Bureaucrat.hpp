@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:07:04 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/15 11:07:16 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:06:57 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class Bureaucrat
         void incrementGrade(void);
         void decrementGrade(void);
 
-        void signForm(const Form &fm) const;
+        void signForm(const Form &f) const;
 
         class GradeTooHighException : public std::exception
         {
@@ -51,7 +51,7 @@ class Bureaucrat
         };
 
     private:
-        std::string _name;
+        const std::string _name;
         int _grade;
 
 };

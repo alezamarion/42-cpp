@@ -6,32 +6,29 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:19:23 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/15 11:40:18 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:18:35 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATIONFORM_HPP
-# define SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
 #include "AForm.hpp"
 #include <fstream>
 
 class ShrubberyCreationForm : public AForm
 {
-  private:
+    public:
+    ShrubberyCreationForm(void);
+    explicit ShrubberyCreationForm(const std::string &target);
+    ShrubberyCreationForm(const ShrubberyCreationForm &src);
+    virtual ~ShrubberyCreationForm(void);
 
-    std::string _target;
+    ShrubberyCreationForm &operator=(const ShrubberyCreationForm &rhs);
 
-  public:
+    const std::string &getTarget(void) const;
 
-    ShrubberyCreationForm( void );
-    ShrubberyCreationForm( std::string &target );
-    ShrubberyCreationForm( const ShrubberyCreationForm &source );
-    ~ShrubberyCreationForm( void );
-
-    ShrubberyCreationForm &operator=( const ShrubberyCreationForm &rhs );
-
-    bool execute( const Bureaucrat &executor ) const;
+    void execute(Bureaucrat const &executor) const;
 };
 
 #endif
