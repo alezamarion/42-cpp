@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:36:22 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/11 17:37:27 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/15 00:00:35 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,23 @@ struct Data
 {
     float length;
     float width; 
+	float area;
     Data(void);
 };
 
 class Serializer
 {
     public:
-        Serializer(void);
-        Serializer(const Serializer&);
         ~Serializer(void);
-
         Serializer& operator=(const Serializer& src);
 
-        float calculateRectangleArea(Data *data);
-    
         static uintptr_t serialize(Data* ptr);
-        static Data *deserialize(uintptr_t raw);     
+        static Data* deserialize(uintptr_t raw);
+        static void calculateRectangleArea(Data* data);    
+
+	private:
+        Serializer(void);
+        Serializer(const Serializer& src) ;	
 };
 
 std::ostream &operator<<(std::ostream &outputStream, const Data &data);

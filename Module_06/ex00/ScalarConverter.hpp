@@ -6,44 +6,55 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 23:57:42 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/13 00:11:45 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:58:21 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
-#include <cstdlib>
-#include <sstream>
-#include <string>
 #include <iostream>
+#include <sstream>
+#include <cstdlib>
+#include <cmath>
+#include <string>
+
+# define INTMAX 2147483647
+# define INTMIN -2147483648
 
 class ScalarConverter
 {
-    public:
-        ScalarConverter(void);
-        explicit ScalarConverter(const std::string& inputRaw);
-        ScalarConverter(ScalarConverter& src);
-        ~ScalarConverter(void);
+	public:
+		~ScalarConverter(void);
+		ScalarConverter &operator=(const ScalarConverter &hrs);
+		static void convert(const std::string &convertIt);
+		
+	private:
+		ScalarConverter(void);
+		ScalarConverter(const ScalarConverter &src);
+		
+		static void _convert(void);
 
-        ScalarConverter& operator=(const ScalarConverter& rhs);
+		static void _print(void);
+		static void _printConvertedValue(void);
+		static void _printNonStandartValue(void);
 
-        operator char();
-        operator int();
-        operator float();
-        operator double();
-        
-        std::string getInput(void) const;
-        double getRaw(void) const;
+		static bool _isNan(void);
+		static bool _isString(void);
+		static bool _isNonStandartValue(void);
 
-        std::string castingChar();
-        std::string castingInt();
-        std::string castingFloat();
-        std::string castingDouble();     
+		static void _convertToChar(void);
+		static void _convertToInt(void);
+		static void _convertToFloat(void);
+		static void _convertToDouble(void);
 
-    private:
-        const std::string _input;
-        double _raw;
+		static std::string 	_string;
+		static std::string 	_nonStandartValue;
+		static char 		_char;
+		static int			_int;
+		static float		_float;
+		static double		_double;
+		static bool			_nan;	
 };
 
 #endif

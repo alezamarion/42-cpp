@@ -6,29 +6,24 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 00:24:24 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/13 00:25:32 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:57:14 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    if(argc == 2)
-    {
-        const std::string raw(argv[1]);
-        ScalarConverter convert(raw);
+	if (argc != 2)
+  	{
+    	std::cout << "\nUsage: ./ScalarConverter <stringToConvert>\n" << std::endl;
 
-        std::cout << convert.castingChar() << "\n";
-        std::cout << convert.castingInt() << "\n";
-        std::cout << convert.castingFloat() << "\n";
-        std::cout << convert.castingDouble() << "\n";
-    }
-    else
-    {
-        std::cerr << "Insert one valid string ou char!\n";
-        std::cerr << "Example: \"c\", \"-42\", \"-4.2f\"\n";
-        return(1);
-    }
-    return(0);
+	    return (1);
+  	}
+  	std::cout << std::endl;
+
+	ScalarConverter::convert(argv[1]);
+
+  	std::cout << std::endl;
+	return (0);
 }

@@ -6,149 +6,197 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 00:04:12 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/13 00:26:42 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:58:38 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-ScalarConverter::ScalarConverter(void) : _input(""), _raw(0)
+std::string ScalarConverter::_string = "";
+std::string ScalarConverter::_nonStandartValue = "";
+
+char        ScalarConverter::_char = 0;
+int         ScalarConverter::_int = 0;
+float       ScalarConverter::_float = 0;
+double      ScalarConverter::_double = 0;
+bool        ScalarConverter::_nan = false;
+
+
+ScalarConverter::ScalarConverter(void)
 {
-    std::cout << "Default constructor called\n";
     return;
 }
 
-ScalarConverter::ScalarConverter(const std::string& inputRaw) : _input(inputRaw), _raw(0)
+ScalarConverter::ScalarConverter(const ScalarConverter &src)
 {
-    std::cout << "Parametric constructor called\n";
-    if (inputRaw.length() == 1 && std::isalpha(*inputRaw.begin()))
-        this->_raw = static_cast<double>(*inputRaw.begin());
-    else
-        this->_raw = std::strtod(inputRaw.c_str(), NULL);
-}
-
-ScalarConverter::ScalarConverter(ScalarConverter& src)
-{
-    std::cout << "Copy constructor called\n";
-    *this = src;
+	*this = src;
+	return;
 }
 
 ScalarConverter::~ScalarConverter(void)
 {
-    std::cout << "Destructor called\n";
     return;
 }
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& rhs)
 {
-    std::cout << "Assignment operator called\n";
-    const_cast<std::string&>(this->_input) = rhs.getInput();
-    const_cast<double&>(this->_raw) = rhs.getRaw();
-    return (*this);
+	_string = rhs._string;
+	_char = rhs._char;
+	_int = rhs._int;
+	_float = rhs._float;
+	_nan = rhs._nan;
+	
+	return (*this);
 }
 
-ScalarConverter::operator char()
+void ScalarConverter::convert(const std::string &convertIt)
 {
-    std::cout << "operator char Called\n";
-    return(static_cast<char>(this->_raw));   
+	_string = convertIt;
+	_nonStandartValue = "";
+	_nan = false;
+	_convert();
+	_print();
+
+	return;
 }
 
-ScalarConverter::operator int()
+void ScalarConverter::_convert(void)
 {
-    std::cout << "operator char Called\n";
-    return(static_cast<int>(this->_raw));
+	//verifica se a string tem qualquer caracter que não seja dígito, procura o que não está presente no argumento
+	//se não achar, retorna std::string::npos
+	if (_string.size() == 1 && _string.find_first_not_of("0123456789") != std::string::npos)
+		_convertToChar();
+	else if (_string.find_first_not_of('f') != std::string::npos)
+		_convertToFloat();
+	else if (_string.find_first_not_of('.') != std::string::npos)
+		_convertToDouble();
+	//strtod converte string para double, se o valor é maior ou menor que INT_MAX, não pode ser convertido
+	//para INT
+	else if (strtod(_string.c_str(), NULL) > INTMAX || strtod(_string.c_str(), NULL) < INTMIN)
+		_convertToDouble();
+	else
+		_convertToInt();
 }
 
-ScalarConverter::operator float()
+void ScalarConverter::_convertToChar(void)
 {
-    std::cout << "operator char Called\n";
-    return(static_cast<float>(this->_raw));
+	_char = static_cast<char>(_string[0]);
+	_int = static_cast<int>(_char);
+	_float = static_cast<float>(_char);
+	_double = static_cast<double>(_char);  
 }
 
-ScalarConverter::operator double()
+void ScalarConverter::_convertToInt(void)
 {
-    std::cout << "operator char Called\n";
-    return(static_cast<double>(this->_raw)); 
+	_int = static_cast<int>(atoi(_string.c_str()));
+	_char = static_cast<char>(_int);
+	_float = static_cast<float>(_int);
+	_double = static_cast<double>(_int);
 }
 
-std::string ScalarConverter::getInput(void) const
+void ScalarConverter::_convertToFloat(void)
 {
-    std::cout << "getInput called\n";
-    return (this->_input);
+
+	_float = static_cast<float>(atof(_string.c_str()));
+	_char = static_cast<char>(_float);
+	_int = static_cast<int>(_float);
+	_double = static_cast<double>(_float);
 }
 
-double ScalarConverter::getRaw(void) const
+void ScalarConverter::_convertToDouble(void)
 {
-    std::cout << "getRaw called\n";
-    return (this->_raw);   
+  	_double = static_cast<double>(strtod(_string.c_str(), NULL));
+	_char = static_cast<char>(_double);
+	_int = static_cast<int>(_double);
+	_float = static_cast<float>(_double);
 }
 
-std::string ScalarConverter::castingChar()
+void ScalarConverter::_print(void)
 {
-    std::stringstream ss;
-    std::cout << "********castingChar*******\n";
-    char c = static_cast<char>(ScalarConverter(this->_input));
-
-    if(this->_input.compare("0") && c == 0)
-        return("char: impossible");
-    else if (!std::isprint(c))
-        return ("char: Non displayable");
-    else
-    {
-        ss << "'" << c << "'";
-        return ("char: " + ss.str());
-    }
+	if (_isNonStandartValue() || _isNan() || _isString())
+		_printNonStandartValue();
+	else
+		_printConvertedValue();
 }
 
-std::string ScalarConverter::castingInt()
+/* Checa se na _string tem algum nonStandartValue
+   Se o i > 2, significa que o valor bateu com "-inff", "+inff", or "nanf".
+   Só temos que registrar -inf, +inf e nan, então se o valor dá diferente, entra no if (i > 2)
+*/
+bool ScalarConverter::_isNonStandartValue(void)
 {
-    std::cout << "********castingInt*******\n";
-    std::stringstream ss;
-    int n = static_cast<int>(ScalarConverter(this->_input));
+	std::string nonStandartValues[6] = { "-inf", "+inf", "nan", "-inff", "+inff", "nanf" };
+	int i = -1;
 
-    if ((this->_input.compare("0") && n == 0) || ((this->_input.compare("-2147483648")
-    && n == -2147483648)))
-        return("int: impossible");
-    else
-    {
-        ss << n;
-        return("int: "+ ss.str());
-    }    
+	while (++i < 6)
+	{
+		if (_string == nonStandartValues[i])
+		{
+			if (i > 2)
+				_nonStandartValue = nonStandartValues[i - 3];
+			else
+				_nonStandartValue = nonStandartValues[i];
+			return (true);
+		}
+	}
+	return (false);
 }
 
-std::string ScalarConverter::castingFloat()
+bool ScalarConverter::_isNan(void)
 {
-    std::cout << "********castingFloat*******\n";
-    std::stringstream ss;
-    float f = static_cast<float>(ScalarConverter(this->_input));
-    int n = static_cast<int>(ScalarConverter(this->_input));
-
-    if(this->_input.compare("0") && f == 0)
-        return ("float : impossible");
-    else
-    {
-        ss << f;
-        if (static_cast<float>(n) == f)
-            ss << ".0f";
-        else
-            ss << "f";
-    }
-    return ("float : "+ ss.str());    
+	if (_string != "nan")
+    	return (false);
+	_nan = true ;
+	return (true);
 }
 
-std::string ScalarConverter::castingDouble()
+/*
+	checks if the value stored in _string meets the criteria to be considered a string. 
+	If _string has more than one character and contains any character other than "-", "+", ".", "f", 
+	or the digits 0-9, the function returns true. Otherwise, it returns false.
+*/
+bool ScalarConverter::_isString(void)
 {
-    std::cout << "********castingDouble*******\n";
-    std::stringstream ss;
-    double d = static_cast<double>(ScalarConverter(this->_input));
+	if (_string.length() > 1 && _string.find_first_not_of("-+.f0123456789") != std::string::npos)
+    	return (true);
+  	return (false);
+}
 
-    if (this->_input.compare("0") && d == 0)
-        return("double: impossible");
-    else
-    {
-        ss << d;
-        if (static_cast <int>(d) == d)
-            ss << ".0";
-        return ("double: "+ ss.str());
-    }  
-}    
+void ScalarConverter::_printNonStandartValue(void)
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	
+	if (_nan)
+	{
+    	std::cout << "float: nanf" << std::endl;
+    	std::cout << "double: nan" << std::endl;
+	}
+	else if (_nonStandartValue != "")
+	{
+   		std::cout << "float: " << _nonStandartValue << "f" << std::endl;
+    	std::cout << "double: " << _nonStandartValue << std::endl;		
+	}
+	else
+	{
+    	std::cout << "float: impossible" << std::endl;
+    	std::cout << "double: impossible" << std::endl;		
+	}
+}
+
+void ScalarConverter::_printConvertedValue(void)
+{
+	if (!_int || !isprint(_char))
+		std::cout << "char: Non displayable" << std::endl;
+	else
+		std::cout << "char: '" << _char << "'" << std::endl;
+	std::cout << "int: " << _int << std::endl;
+	if (_float == _int)
+  		std::cout << "float: " << _float << ".0f" << std::endl;
+	else
+  		std::cout << "float: " << _float << "f" << std::endl;
+	if (_double == _int)
+  		std::cout << "double: " << _double << ".0" << std::endl;
+	else
+  		std::cout << "double: " << _double << std::endl;
+}
