@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 21:08:08 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/18 14:54:07 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:33:05 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <climits>
 #include <exception>
 #include <vector>
+#include <iostream>
 
 
 class Span
@@ -35,7 +36,7 @@ class Span
         };
 
         Span(void);
-        explicit Span(size_t maximum);
+        explicit Span(unsigned int maximum);
         Span(const Span& src);
         ~Span(void);
 
@@ -53,10 +54,12 @@ class Span
 
         size_t shortestSpan(void);
         size_t longestSpan(void);
+
+		void printVector(void) const;
         
     private:
         std::vector<int> _vector;
-        size_t _maximum;
+        unsigned int _maximum;
 };
 
 #include "Span.tpp"

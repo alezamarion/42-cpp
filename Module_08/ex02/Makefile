@@ -35,6 +35,9 @@ $(OBJ_DIR):
 run:
 			./$(NAME)
 
+runv:		all
+			valgrind -q --leak-check=full --show-leak-kinds=all -s --track-origins=yes ./span
+
 clean:
 			@$(RM) $(OBJ_DIR)
 			@echo "$(GREEN)Object files removed $(RESET)"
