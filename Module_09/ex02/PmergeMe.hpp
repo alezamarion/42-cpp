@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:34:20 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/21 16:59:26 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:40:48 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,45 @@
 #define PMERGEME_HPP
 
 #include <iostream>
-#include <deque>
-#include <list>
+#include <cstdlib>
+#include <ctime>
+#include <stdexcept>
 #include <algorithm>
+#include <deque>
+#include <vector>
+#include <list>
 
-/*	The template class PmergeMe provides generic functionality for handling containers of various types T. 
-    It includes operations such as sorting, merging, checking for duplicates, and printing container elements. */
-template <typename T>
 class PmergeMe
 {
     public:
         PmergeMe(void);
-        PmergeMe(const PmergeMe<T> &src);
+        PmergeMe(const PmergeMe &src);
         ~PmergeMe(void);
 
-        PmergeMe &operator=(const PmergeMe<T> &rhs);
+        PmergeMe &operator=(const PmergeMe &rhs);
 
-        bool hasDuplicate(T &container);
-        void mergeSort(T &container);
-        void mergeSort(T &container, typename T::iterator begin, typename T::iterator end);
-        void mergeMe(typename T::iterator begin, typename T::iterator middle, typename T::iterator end);
-        void printMe(T &container);
+		// load and validate list
+		bool loadList(int argc, char **argv);
+        bool hasDuplicate(void);
+		static bool compare(unsigned int a, unsigned int b);
+
+		// get and show data before using algorithm with Vector and List
+        void printUnsorted(void);
+        void printSorted(void);
+		size_t containerSize(void);
+
+		// Ford–Johnson algorithm implementation
+		void sortList(void);
+		void binaryListInsert(unsigned int value);
+		void sortVector(void);
+		void binaryVectorInsert(unsigned int value);
+		static bool Pair_compare(std::pair<unsigned int, unsigned int> a, std::pair<unsigned int, unsigned int> b);
+
+	private:
+		std::deque<unsigned int> _inputDeque;
+		std::deque<unsigned int> _orderedDeque;
+		std::list<unsigned int> _orderedList;
+		std::vector<unsigned int> _orderedVector;
 };
 
 #endif
-
-/*	The reason for having two versions of mergeSort is to provide flexibility and convenience to the user. 
-	Sometimes, the user may want to sort the entire container, while in other cases, they may only need to sort a specific range of elements within 
-		the container. 
-	By providing both versions, the PmergeMe class caters to both scenarios without the need for the user to manually extract a sub-range of elements 
-		before sorting.
-	Having the flexibility to sort specific ranges can be useful when dealing with large containers or when sorting different parts of the container 
-		separately based on specific requirements.
-	Overall, the two versions of mergeSort allow for more flexibility in sorting containers, providing options to sort either the entire container or a 
-		specific range based on the user's needs. */

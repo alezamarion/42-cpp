@@ -6,147 +6,64 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:40:47 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/21 16:59:46 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:41:11 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-template <typename T>
-PmergeMe<T>::PmergeMe(void)
+PmergeMe::PmergeMe(void)
 {
     return;
 }
 
-template <typename T>
-PmergeMe<T>::PmergeMe(const PmergeMe &src)
+PmergeMe::PmergeMe(const PmergeMe &src)
 {
     *this = src;
 }
 
-template <typename T>
-PmergeMe<T>::~PmergeMe(void)
+PmergeMe::~PmergeMe(void)
 {
     return;
 }
 
-template <typename T>
-PmergeMe<T> &PmergeMe<T>::operator=(const PmergeMe<T> &rhs)
+PmergeMe &PmergeMe::operator=(const PmergeMe &rhs)
 {
     if (this != &rhs)
         *this = rhs;
     return (*this);
 }
 
-/*	This function creates a sorted copy of the input container, sorts it using the mergeSort algorithm, and then checks for duplicates using the 
-	std::unique algorithm. By comparing the iterators before and after the std::unique operation, the function determines whether the original 
-	container contains any duplicate elements and returns a bool value accordingly. */
-
-template <typename T>
-bool PmergeMe<T>::hasDuplicate(T &container)
+bool PmergeMe::loadList(int argc, char** argv)
 {
-    T sortedContainer = container;
-    mergeSort(sortedContainer);
-    
-	/* The function compares the iterator returned by std::unique with the end iterator of the sortedContainer. 
-	   If they are equal, it means that there were no duplicates in the original container, and the function returns false. 
-	   Otherwise, it means that there were duplicates, and the function returns true. */
-	return (std::unique(sortedContainer.begin(), sortedContainer.end()) != sortedContainer.end());
+	for (int i = 1; i < argc; ++i)
+	{
+		int num = std::atoi(argv[i]);
+
+		if (num <= 0)
+			return (false);        
+		this->_inputDeque.push_back(num);
+	}
+	return (true);
 }
 
-/* This implementation of mergeSort provides a convenient way to sort the entire container by utilizing the overloaded mergeSort function 
-	that works on specific ranges within the container. 
-   This call to mergeSort effectively initiates the merge sort algorithm on the entire range of elements in the container.
-   By calling the overloaded mergeSort function with the container, its begin iterator, and its end iterator, the mergeSort function sorts the elements
-	in the container using the merge sort algorithm. */
-template <typename T>
-void PmergeMe<T>::mergeSort(T &container)
+bool PmergeMe::hasDuplicate(void)
 {
-    mergeSort(container, container.begin(), container.end());
+    _orderedDeque = this->_inputDeque;
+    std::sort(_orderedDeque.begin(), _orderedDeque.end(), &PmergeMe::compare);
+    return (std::unique(_orderedDeque.begin(), _orderedDeque.end()) != _orderedDeque.end());
 }
 
-/* This code is an implementation of the merge sort algorithm for a generic container T. It recursively divides the container into smaller 
-   subcontainers until the base case is reached (when begin == end or there is only one element between begin and end), 
-   and then merges the sorted subcontainers back together. */
-template <typename T>
-void PmergeMe<T>::mergeSort(T &container, typename T::iterator begin, typename T::iterator end)
+bool PmergeMe::compare(unsigned int a, unsigned int b)
 {
-	//base case, range contains 0 or 1 element
-    if (begin == end || ++begin == end)
-        return;
-	//iterator is adjusted by decrementing it, so it points to the actual first element of the range.
-    --begin;
-	/*  The middle point of the range is determined by calculating the distance between begin and end and dividing it by 2. 
-	    The std::advance function is used to move the middle iterator to the correct position in the container. */
-    typename T::iterator middle = begin;
-    std::advance(middle, std::distance(begin, end) / 2);
-
-	/* Recursively calls mergeSort on the left half of the range (begin to middle) and the right half of the range (middle to end), effectively 
-	   dividing the problem into smaller subproblems. */
-    mergeSort(container, begin, middle);
-    mergeSort(container, middle, end);
-    
-	/* Finally, the mergeMe function is called to merge the sorted halves together. This is where the actual merging of elements happens */
-	mergeMe(begin, middle, end);
+	return a < b;
 }
 
-/* This function is responsible for merging two sorted halves of a container back into a single sorted container. The mergeMe function takes three 
-   parameters: begin, middle, and end. These iterators define the range of elements to be merged. The begin iterator points to the beginning 
-   of the range, middle points to the middle element, and end points to one past the last element.*/
-template <typename T>
-void PmergeMe<T>::mergeMe(typename T::iterator begin, typename T::iterator middle, typename T::iterator end)
-{
-	/* The function creates two temporary containers, left and right, and copies the elements from the left and right halves of the range into 
-	   these containers. */
-    T left(begin, middle);
-    T right(middle, end);
-    
-	/* Iterators leftIt, rightIt, and mergeIt are initialized. leftIt and rightIt iterate over the left and right containers, respectively, 
-	   while mergeIt iterates over the original container to merge the sorted elements. */
-    typename T::iterator leftIt = left.begin();
-    typename T::iterator rightIt = right.begin();
-    typename T::iterator mergeIt = begin;
-
-	/* The function enters a loop that compares the elements pointed to by leftIt and rightIt. If the element in the left container is less than 
-	   or equal to the element in the right container, it is copied to the merged container using *mergeIt = *leftIt, and leftIt is incremented. 
-	   Otherwise, the element from the right container is copied, and rightIt is incremented. In either case, mergeIt is also incremented. */
-    while (leftIt != left.end() && rightIt != right.end())
-    {
-        if (*leftIt <= *rightIt)
-        {
-            *mergeIt = *leftIt;
-            ++leftIt;
-        }
-        else
-        {
-            *mergeIt = *rightIt;
-            ++rightIt;
-        }
-        ++mergeIt;
-    }
-	/* After the loop, there may be remaining elements in either the left or right containers. The remaining elements in the left container 
-	   are copied to the merged container using another loop, and then the remaining elements in the right container are copied similarly. 
-	   The result is that the merged container, starting from begin, contains all the elements from the original range (begin to end) in sorted order.*/
-    while (leftIt != left.end())
-    {
-        *mergeIt = *leftIt;
-        ++leftIt;
-        ++mergeIt;
-    }
-    while (rightIt != right.end())
-    {
-        *mergeIt = *rightIt;
-        ++rightIt;
-        ++mergeIt;
-    }
-}
-
-template <typename T>
-void PmergeMe<T>::printMe(T &container)
+void PmergeMe::printUnsorted(void)
 {
     int i = 0;
     
-    for (typename T::const_iterator it = container.begin(); it != container.end(); ++it)
+    for (std::deque<unsigned int>::const_iterator it = _inputDeque.begin(); it != _inputDeque.end(); ++it)
     {
         std::cout << *it << " ";
         i++;
@@ -159,7 +76,133 @@ void PmergeMe<T>::printMe(T &container)
     std::cout << std::endl;
 }
 
-/*  The explicit template instantiations are included in the same source file or compilation unit as the member function definitions 
-    to ensure that the necessary code is generated for the specific types used in the instantiations.*/
-template class PmergeMe < std::deque<int> >;
-template class PmergeMe < std::list<int> >;
+void PmergeMe::printSorted(void)
+{
+    int i = 0;
+    
+    for (std::deque<unsigned int>::const_iterator it = _orderedDeque.begin(); it != _orderedDeque.end(); ++it)
+    {
+        std::cout << *it << " ";
+        i++;
+        if (i >= 15)
+        {
+            std::cout << "[...]";
+            break;
+        }
+    }
+    std::cout << std::endl;
+}
+
+size_t PmergeMe::containerSize(void)
+{
+	return this->_inputDeque.size();
+}
+
+/*  Ford–Johnson algorithm  */
+
+/* Steps:
+	1 - Determine if the array is even or odd numbered in length. If odd, remove the last number, designate it as a 
+	‘straggler’ and insert it later into the sorted array.
+	2 - Arbitrarily divide the sequence to sort into pairs of two values.
+	3 - Sort the pairs, so the order is always [less, greater].
+	4 - Sort the sequence recursively by the value of it’s largest pair.
+	5 - Create a new sequence ‘S’, by pulling out the [highest] value of each pair and inserting it into ‘S’.
+	6 - The remaining values form a temporary ‘pend’ array.
+	7 - Loop through the elements in ‘pend’, and using the use binary search to insert each ‘pend’ element into ‘S’.
+	8 - If a ‘straggler’ was found, do a leftover loop and insertion to complete the list.
+
+	The main differences between the two implementations lie in the choice of data structures used to store 
+	the sorted elements.
+*/
+
+//vector implementation
+void PmergeMe::sortVector()
+{
+	std::deque<unsigned int> copy(this->_inputDeque);
+	std::deque<std::pair<unsigned int, unsigned int> > K_pairs;
+	unsigned int bucket[2];
+	this->_orderedVector.reserve(this->_inputDeque.size() + 2);
+	while (copy.size() > 1)	//1										
+	{
+		//create pairs (already inner-ordered), if odd, there will be a leftover value
+		bucket[0] = copy.front(); //2
+		copy.pop_front();
+		bucket[1] = copy.front();
+		copy.pop_front();
+		if (bucket[0] < bucket[1]) //3
+			K_pairs.push_back(std::make_pair(bucket[0],bucket[1]));
+		else
+			K_pairs.push_back(std::make_pair(bucket[1],bucket[0]));
+	}
+	std::sort(K_pairs.begin(), K_pairs.end(), &PmergeMe::Pair_compare); //4
+	for (std::deque<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++) //5
+	{
+		this->_orderedVector.push_back((*it).second);
+	}
+	for (std::deque<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++) //6
+	{
+		this->binaryVectorInsert((*it).first);
+	}
+	if (copy.size() == 1) //7-8
+		this->binaryVectorInsert(copy.front());
+};
+
+//list implementation
+void PmergeMe::sortList()
+{
+	std::deque<unsigned int> copy(this->_inputDeque);
+	std::deque<std::pair<unsigned int, unsigned int> > K_pairs;
+	unsigned int bucket[2];
+
+	while (copy.size() > 1) //1
+	{
+		//create pairs (already inner-ordered), if odd, there will be a leftover value
+		bucket[0] = copy.front(); //3
+		copy.pop_front();
+		bucket[1] = copy.front();
+		copy.pop_front();
+		if (bucket[0] < bucket[1])
+			K_pairs.push_back(std::make_pair(bucket[0],bucket[1]));
+		else
+			K_pairs.push_back(std::make_pair(bucket[1],bucket[0]));
+	}
+	std::sort(K_pairs.begin(), K_pairs.end(), &PmergeMe::Pair_compare); //4
+	for (std::deque<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++) //5
+	{
+		this->_orderedList.push_back((*it).second);
+	}
+	for (std::deque<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++) //6
+	{
+		this->binaryListInsert((*it).first);
+	}
+	if (copy.size() == 1) //7-8
+		this->binaryListInsert(copy.front());
+}
+
+/*	- The function uses the std::lower_bound() algorithm to find the position in the sorted list where the value 
+	should be inserted. lower_bound() returns an iterator pointing to the first element that is not less than 
+	the value.
+	- The iterator it obtained from lower_bound() points to the position in the list where the value should 
+	be inserted.
+	- The insert() function takes the iterator it and the value as arguments, and it adjusts the list's internal 
+	structure to insert the value at the correct position. */
+	
+void PmergeMe::binaryVectorInsert(unsigned int value)
+{
+	std::vector<unsigned int>::iterator it = std::lower_bound(this->_orderedVector.begin(), this->_orderedVector.end(), value);
+	this->_orderedVector.insert(it, value);
+}
+
+void PmergeMe::binaryListInsert(unsigned int value)
+{
+	std::list<unsigned int>::iterator it = std::lower_bound(this->_orderedList.begin(), this->_orderedList.end(), value);
+	this->_orderedList.insert(it, value);
+}
+
+/*	The purpose of the Pair_compare function is to define the sorting order for pairs of unsigned integers based on 
+	their second elements. By returning true when a.second is less than b.second, the function establishes an ordering
+	that sorts pairs in ascending order based on their second element. */
+bool PmergeMe::Pair_compare(std::pair<unsigned int, unsigned int> a, std::pair<unsigned int, unsigned int> b)
+{
+	return (a.second < b.second);
+}
