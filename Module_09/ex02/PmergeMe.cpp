@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:40:47 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/24 22:49:46 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/25 12:53:16 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool PmergeMe::loadList(int argc, char** argv)
 	{
 		int num = std::atoi(argv[i]);
 
-		if (num <= 0)
+		if (num < 0)
 			return (false);        
 		this->_inputDeque.push_back(num);
 	}
