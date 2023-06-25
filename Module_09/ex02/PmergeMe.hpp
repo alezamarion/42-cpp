@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:34:20 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/24 22:40:48 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:49:57 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ class PmergeMe
 		void binaryListInsert(unsigned int value);
 		void sortVector(void);
 		void binaryVectorInsert(unsigned int value);
-		static bool Pair_compare(std::pair<unsigned int, unsigned int> a, std::pair<unsigned int, unsigned int> b);
+		static bool pairCompare(std::pair<unsigned int, unsigned int> a, std::pair<unsigned int, unsigned int> b);
 
 	private:
 		std::deque<unsigned int> _inputDeque;

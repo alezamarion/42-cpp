@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:40:47 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/24 22:41:11 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:49:46 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void PmergeMe::sortVector()
 		else
 			K_pairs.push_back(std::make_pair(bucket[1],bucket[0]));
 	}
-	std::sort(K_pairs.begin(), K_pairs.end(), &PmergeMe::Pair_compare); //4
+	std::sort(K_pairs.begin(), K_pairs.end(), &PmergeMe::pairCompare); //4
 	for (std::deque<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++) //5
 	{
 		this->_orderedVector.push_back((*it).second);
@@ -166,7 +166,7 @@ void PmergeMe::sortList()
 		else
 			K_pairs.push_back(std::make_pair(bucket[1],bucket[0]));
 	}
-	std::sort(K_pairs.begin(), K_pairs.end(), &PmergeMe::Pair_compare); //4
+	std::sort(K_pairs.begin(), K_pairs.end(), &PmergeMe::pairCompare); //4
 	for (std::deque<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++) //5
 	{
 		this->_orderedList.push_back((*it).second);
@@ -202,7 +202,7 @@ void PmergeMe::binaryListInsert(unsigned int value)
 /*	The purpose of the Pair_compare function is to define the sorting order for pairs of unsigned integers based on 
 	their second elements. By returning true when a.second is less than b.second, the function establishes an ordering
 	that sorts pairs in ascending order based on their second element. */
-bool PmergeMe::Pair_compare(std::pair<unsigned int, unsigned int> a, std::pair<unsigned int, unsigned int> b)
+bool PmergeMe::pairCompare(std::pair<unsigned int, unsigned int> a, std::pair<unsigned int, unsigned int> b)
 {
 	return (a.second < b.second);
 }
