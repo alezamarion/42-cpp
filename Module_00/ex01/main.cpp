@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:03:52 by azamario          #+#    #+#             */
-/*   Updated: 2023/05/30 20:35:19 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:15:20 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void addContact(PhoneBook &objPhoneBook)
     std::string phoneNumber;
     std::string darkestSecret;
 
-    std::cin.ignore(); //clear input buffer - This function is commonly used to handle scenarios where there is unwanted input remaining in the buffer
+    std::cin.ignore();
     std::cout << "Input First Name: " << std::endl;
     std::getline(std::cin, firstName);
     if(!fieldValidation(firstName, "First Name"))
@@ -118,7 +118,7 @@ void searchContact(PhoneBook objPhoneBook)
     std::cout << "\nChoose a contact by index: " << std::endl;
     std::cin >> option;
     ss << option;
-    ss >> index; //This effectively converts the user's input from a string to an integer.
+    ss >> index;
     objPhoneBook.searchContact(index - 1);
 }
 

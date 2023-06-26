@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:24:07 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/16 08:54:33 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:28:27 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int main(void)
 	
     std::cout << "[ Before Swap Int ]\n";
     std::cout << "int1 = " << int1 << ", int2 = " << int2 << std::endl;
-    //explicit instantiation -> preferred
     ::swap<int>(int1, int2);
     std::cout << "\n";
     std::cout << "[ After Swap Int ]\n";
@@ -37,7 +36,6 @@ int main(void)
 
     std::cout << "[ Before Swap Float ]\n";
     std::cout << "float1 = " << float1 << ", float2 = " << float2 << std::endl;
-    // implicit instantiation -> it might not work for complex classes
     ::swap(float1, float2);
     std::cout << "\n";
     std::cout << "[ After Swap Float ]\n";

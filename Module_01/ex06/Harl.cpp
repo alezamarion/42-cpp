@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 21:45:07 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/01 20:50:12 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:20:51 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ void Harl::error(void)
 
 void Harl::complain(std::string level)
 {
-    /* It begins by declaring and initializing two arrays: These arrays are used to map level strings to corresponding
-    member functions of the Harl class. */
-
     std::string complainLevel[4] = {"debug", "info", "warning", "error"};
     void (Harl::*ptrFunc[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
     size_t opt;
@@ -67,10 +64,6 @@ void Harl::complain(std::string level)
         if(!complainLevel[opt].compare(level))
             break;
     }
-
-    /* The __attribute__((fallthrough)) statement is used to indicate that the control should fall through to the next case.
-    This behavior is similar to omitting a break statement in a regular switch statement. */
-
     switch (opt)
     {
     case 0:

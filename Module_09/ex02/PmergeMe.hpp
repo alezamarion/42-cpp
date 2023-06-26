@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:34:20 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/24 22:49:57 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:39:18 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,14 @@ class PmergeMe
 
         PmergeMe &operator=(const PmergeMe &rhs);
 
-		// load and validate list
 		bool loadList(int argc, char **argv);
         bool hasDuplicate(void);
 		static bool compare(unsigned int a, unsigned int b);
 
-		// get and show data before using algorithm with Vector and List
         void printUnsorted(void);
         void printSorted(void);
 		size_t containerSize(void);
 
-		// Ford–Johnson algorithm implementation
 		void sortList(void);
 		void binaryListInsert(unsigned int value);
 		void sortVector(void);

@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:59:41 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/15 00:01:36 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:27:44 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ Base* generate(void)
 	}
 }
 
-/*
-	The purpose of this code is to determine the actual runtime type of the object pointed to by p in 
-	a polymorphic class hierarchy. It uses dynamic_cast to perform type checks and provide different behavior 
-	based on the actual type of the object.
-*/
-
 void identify(Base* p)
 {
 	if (dynamic_cast<A*>(p))
@@ -43,18 +37,6 @@ void identify(Base* p)
 	else
 		std::cout << "Object not of type A, B or C" << std::endl;
 }
-
-/*
-	The purpose of this function is to identify the actual derived type of the object being referred to by p 
-	using dynamic_cast.
-
-	If the dynamic_cast succeeds (i.e., if p refers to an object of type A or a derived class of A), the object 
-	is assigned to a, and the code inside the corresponding try block is executed. 
-	
-	If the dynamic_cast fails (i.e., if p does not refer to an object of type A or a derived class of A), 
-	an exception of type std::bad_cast is thrown. The code inside the corresponding catch block is executed, 
-	and the message "catch A: " followed by the exception's error message is printed.
-*/
 
 void identify(Base& p)
 {

@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 00:04:12 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/14 23:58:38 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:26:34 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,12 @@ void ScalarConverter::convert(const std::string &convertIt)
 
 void ScalarConverter::_convert(void)
 {
-	//verifica se a string tem qualquer caracter que não seja dígito, procura o que não está presente no argumento
-	//se não achar, retorna std::string::npos
 	if (_string.size() == 1 && _string.find_first_not_of("0123456789") != std::string::npos)
 		_convertToChar();
 	else if (_string.find_first_not_of('f') != std::string::npos)
 		_convertToFloat();
 	else if (_string.find_first_not_of('.') != std::string::npos)
 		_convertToDouble();
-	//strtod converte string para double, se o valor é maior ou menor que INT_MAX, não pode ser convertido
-	//para INT
 	else if (strtod(_string.c_str(), NULL) > INTMAX || strtod(_string.c_str(), NULL) < INTMIN)
 		_convertToDouble();
 	else
@@ -119,10 +115,6 @@ void ScalarConverter::_print(void)
 		_printConvertedValue();
 }
 
-/* Checa se na _string tem algum nonStandartValue
-   Se o i > 2, significa que o valor bateu com "-inff", "+inff", or "nanf".
-   Só temos que registrar -inf, +inf e nan, então se o valor dá diferente, entra no if (i > 2)
-*/
 bool ScalarConverter::_isNonStandartValue(void)
 {
 	std::string nonStandartValues[6] = { "-inf", "+inf", "nan", "-inff", "+inff", "nanf" };
@@ -150,11 +142,6 @@ bool ScalarConverter::_isNan(void)
 	return (true);
 }
 
-/*
-	checks if the value stored in _string meets the criteria to be considered a string. 
-	If _string has more than one character and contains any character other than "-", "+", ".", "f", 
-	or the digits 0-9, the function returns true. Otherwise, it returns false.
-*/
 bool ScalarConverter::_isString(void)
 {
 	if (_string.length() > 1 && _string.find_first_not_of("-+.f0123456789") != std::string::npos)

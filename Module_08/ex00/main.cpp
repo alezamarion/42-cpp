@@ -6,23 +6,11 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:59:08 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/18 19:29:20 by azamario         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:30:52 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Easyfind.hpp"
-
-/*	This code showcases the insertion of values into a vector, list and deque, 
-	and the use of the easyfind function to search for specific values,
-	handling exceptions when values are not found.
-
-	1 - container initialization
-	2 - insert values 
-	3 - print elements
-	4 - search for a value using easyfind
-	5 - handle an exception if value not found
-
-*/
 
 void print(int n)
 {
