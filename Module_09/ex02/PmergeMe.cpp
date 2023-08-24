@@ -99,7 +99,7 @@ size_t PmergeMe::containerSize(void)
 }
 
 
-/*  Ford–Johnson algorithm  */
+/*  Ford–Johnson VECTOR algorithm  */
 
 void PmergeMe::sortVector()
 {
@@ -181,79 +181,6 @@ int PmergeMe::jacobsthal(int n)
 }
 
 
-// void PmergeMe::sortVector()
-// {
-// 	std::vector<unsigned int> copy(this->_inputVector);
-// 	std::vector<std::pair<unsigned int, unsigned int> > K_pairs;
-// 	unsigned int bucket[2];
-// 	this->_orderedVector.reserve(this->_inputVector.size() + 2);
-// 	while (copy.size() > 1)										
-// 	{
-// 		bucket[0] = copy.front();
-// 		copy.erase(copy.begin());
-// 		bucket[1] = copy.front();
-// 		copy.erase(copy.begin());
-// 		if (bucket[0] < bucket[1])
-// 			K_pairs.push_back(std::make_pair(bucket[0],bucket[1]));
-// 		else
-// 			K_pairs.push_back(std::make_pair(bucket[1],bucket[0]));
-// 	}
-// 	std::sort(K_pairs.begin(), K_pairs.end(), &PmergeMe::pairCompare);
-// 	for (std::vector<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++)
-// 	{
-// 		this->_orderedVector.push_back((*it).second);
-// 	}
-// 	for (std::vector<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++)
-// 	{
-// 		this->binaryVectorInsert((*it).first);
-// 	}
-// 	if (_inputVector.size() == 1)
-// 		this->binaryVectorInsert(_inputVector.front());
-// };
+/*  Ford–Johnson DEQUE algorithm  */
 
-void PmergeMe::sortList()
-{
-	std::deque<unsigned int> copy(this->_inputDeque);
-	std::deque<std::pair<unsigned int, unsigned int> > K_pairs;
-	unsigned int bucket[2];
 
-	while (copy.size() > 1)
-	{
-		bucket[0] = copy.front();
-		copy.pop_front();
-		bucket[1] = copy.front();
-		copy.pop_front();
-		if (bucket[0] < bucket[1])
-			K_pairs.push_back(std::make_pair(bucket[0],bucket[1]));
-		else
-			K_pairs.push_back(std::make_pair(bucket[1],bucket[0]));
-	}
-	std::sort(K_pairs.begin(), K_pairs.end(), &PmergeMe::pairCompare);
-	for (std::deque<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++)
-	{
-		this->_orderedList.push_back((*it).second);
-	}
-	for (std::deque<std::pair<unsigned int, unsigned int> >::iterator it = K_pairs.begin(); it < K_pairs.end(); it++)
-	{
-		this->binaryListInsert((*it).first);
-	}
-	if (copy.size() == 1)
-		this->binaryListInsert(copy.front());
-}
-	
-void PmergeMe::binaryVectorInsert(unsigned int value)
-{
-	std::vector<unsigned int>::iterator it = std::lower_bound(this->_orderedVector.begin(), this->_orderedVector.end(), value);
-	this->_orderedVector.insert(it, value);
-}
-
-void PmergeMe::binaryListInsert(unsigned int value)
-{
-	std::list<unsigned int>::iterator it = std::lower_bound(this->_orderedList.begin(), this->_orderedList.end(), value);
-	this->_orderedList.insert(it, value);
-}
-
-bool PmergeMe::pairCompare(std::pair<unsigned int, unsigned int> a, std::pair<unsigned int, unsigned int> b)
-{
-	return (a.second < b.second);
-}
