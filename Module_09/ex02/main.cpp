@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/20 23:04:54 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/24 22:42:40 by azamario         ###   ########.fr       */
+/*   Created: 2023/08/24 19:33:50 by azamario          #+#    #+#             */
+/*   Updated: 2023/08/24 19:33:53 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ int main(int argc, char *argv[])
 	clock_t start;
     clock_t end;
 
+	/* --- ERROR HANDLING --- */
     if (argc < 2)
 	{
 		std::cerr << "Error: Missing arguments\n" << std::endl;
 		return (1);
 	}
-
 	if (!input.loadList(argc, argv))
 	{
 		std::cerr << "Error: Negative number not allowed\n" << std::endl;
 		return (1);
 	}
-
 	if (input.hasDuplicate())
     {
       std::cerr << "Error: Duplicated numbers not allowed\n" << std::endl;
       return (1);
     }
 
+	/* --- SORT VECTOR  --- */
 	std::cout << "---- VECTOR ----" << std::endl;
     std::cout << "Before: ";
 	input.printUnsorted();
@@ -53,6 +53,7 @@ int main(int argc, char *argv[])
                 << " elements with std::vector : " << static_cast<double>(end - start) / CLOCKS_PER_SEC
                 << " seconds" << "\n" << std::endl;
 
+	/* --- SORT DEQUE  --- */
 	std::cout << "---- DEQUE ----" << std::endl;
     std::cout << "Before: ";
 	input.printUnsorted();

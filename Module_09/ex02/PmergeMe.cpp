@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:40:47 by azamario          #+#    #+#             */
-/*   Updated: 2023/06/26 12:39:01 by azamario         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:51:06 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ size_t PmergeMe::containerSize(void)
 
 void PmergeMe::sortVector()
 {
-	unsigned int straggler = -1;
+	int straggler = -1;
 	_orderedVector = this->_inputVector;
 	std::vector<std::pair<unsigned int, unsigned int> > pairs;
   	std::vector<unsigned int> mainSeq, pendingSeq, jacobSeq, indexSeq;
@@ -193,7 +193,7 @@ std::vector<uint> PmergeMe::createVectorPendingSeq(std::vector<std::pair<uint, u
 
 void PmergeMe::sortDeque()
 {
-	unsigned int straggler = -1;
+	int straggler = -1;
 	_orderedDeque = this->_inputDeque;
 	std::deque<std::pair<unsigned int, unsigned int> > pairs;
   	std::deque<unsigned int> mainSeq, pendingSeq, jacobSeq, indexSeq;
@@ -219,6 +219,7 @@ void PmergeMe::sortDeque()
     	insertStraggler(mainSeq, straggler);
 	_orderedDeque.assign(mainSeq.begin(), mainSeq.end());
 }
+
 
 std::deque<std::pair<uint, uint> > PmergeMe::createDequePairs(std::deque<uint> &arr)
 {

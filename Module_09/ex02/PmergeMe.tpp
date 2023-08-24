@@ -154,7 +154,4 @@ static void insertStraggler(Seq &mainSeq, uint straggler)
   mainSeq.insert(stragglerPos, straggler);
 };
 
-
-
-
 #endif
