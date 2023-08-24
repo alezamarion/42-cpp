@@ -45,11 +45,29 @@ class PmergeMe
 		void binaryVectorInsert(unsigned int value);
 		static bool pairCompare(std::pair<unsigned int, unsigned int> a, std::pair<unsigned int, unsigned int> b);
 
+		static int jacobsthal(int n);
+
+
 	private:
 		std::deque<unsigned int> _inputDeque;
 		std::deque<unsigned int> _orderedDeque;
 		std::list<unsigned int> _orderedList;
 		std::vector<unsigned int> _orderedVector;
+		std::vector<unsigned int> _inputVector;
+		std::vector<unsigned int> _printOrderedVector;
+
+		static std::vector<std::pair<uint, uint> >
+  		createVectorPairs(std::vector<uint> &copy);
+
+		static std::vector<uint>
+  		createVectorMainSeq(std::vector<std::pair<uint, uint> > &pairs);
+
+		static std::vector<uint>
+  		createVectorPendingSeq(std::vector<std::pair<uint, uint> > &pairs);
+
+
 };
+
+#include "PmergeMe.tpp"
 
 #endif

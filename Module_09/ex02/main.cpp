@@ -52,14 +52,14 @@ int main(int argc, char *argv[])
                 << " elements with std::vector : " << static_cast<double>(end - start) / CLOCKS_PER_SEC
                 << " seconds" << std::endl;
 
-    start = clock();
-	input.sortList();
-	end = clock();
+    // start = clock();
+	// input.sortList();
+	// end = clock();
 
-    std::cout << std::endl;
-	std::cout   << "Time to process a range of " << input.containerSize() 
-                << " elements with std::list : " << static_cast<double>(end - start) / CLOCKS_PER_SEC
-                << " seconds" << std::endl;
+    // std::cout << std::endl;
+	// std::cout   << "Time to process a range of " << input.containerSize() 
+    //             << " elements with std::list : " << static_cast<double>(end - start) / CLOCKS_PER_SEC
+    //             << " seconds" << std::endl;
 
     std::cout << std::endl;
 
