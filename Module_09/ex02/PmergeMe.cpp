@@ -49,9 +49,9 @@ bool PmergeMe::loadList(int argc, char** argv)
 
 bool PmergeMe::hasDuplicate(void)
 {
-    _printOrderedVector = this->_inputVector;
-    std::sort(_printOrderedVector.begin(), _printOrderedVector.end(), &PmergeMe::compare);
-    return (std::unique(_printOrderedVector.begin(), _printOrderedVector.end()) != _printOrderedVector.end());
+    _checkDuplicate = this->_inputVector;
+    std::sort(_checkDuplicate.begin(), _checkDuplicate.end(), &PmergeMe::compare);
+    return (std::unique(_checkDuplicate.begin(), _checkDuplicate.end()) != _checkDuplicate.end());
 }
 
 bool PmergeMe::compare(unsigned int a, unsigned int b)
@@ -80,7 +80,7 @@ void PmergeMe::printSorted(void)
 {
     int i = 0;
     
-    for (std::vector<unsigned int>::const_iterator it = _printOrderedVector.begin(); it != _printOrderedVector.end(); ++it)
+    for (std::vector<unsigned int>::const_iterator it = _orderedVector.begin(); it != _orderedVector.end(); ++it)
     {
         std::cout << *it << " ";
         i++;
@@ -95,7 +95,7 @@ void PmergeMe::printSorted(void)
 
 size_t PmergeMe::containerSize(void)
 {
-	return this->_inputDeque.size();
+	return this->_inputVector.size();
 }
 
 
@@ -104,21 +104,21 @@ size_t PmergeMe::containerSize(void)
 void PmergeMe::sortVector()
 {
 	unsigned int straggler = -1;
-	std::vector<unsigned int> copy(this->_inputVector);
+	_orderedVector = this->_inputVector;
 	std::vector<std::pair<unsigned int, unsigned int> > pairs;
 
   	std::vector<unsigned int> mainSeq, pendingSeq, jacobSeq, indexSeq;
 
-  	if (copy.size() < 2 or isSorted(copy))
+  	if (_orderedVector.size() < 2 or isSorted(_orderedVector))
 	{
 		return;
   	}
-  	if (hasStraggler(copy))
+  	if (hasStraggler(_orderedVector))
 	{
-    	straggler = copy.back();
-    	copy.pop_back();
+    	straggler = _orderedVector.back();
+    	_orderedVector.pop_back();
   	}
- 	pairs = createVectorPairs(copy);
+ 	pairs = createVectorPairs(_orderedVector);
 	sortPairs(pairs);
   	insertionSortByLargestValue(pairs, pairs.size());
  	mainSeq = createVectorMainSeq(pairs);
@@ -128,17 +128,17 @@ void PmergeMe::sortVector()
     fillMainSeq(mainSeq, indexSeq, pendingSeq);
   	if (straggler >= 0)
     	insertStraggler(mainSeq, straggler);
-	copy.assign(mainSeq.begin(), mainSeq.end());
+	_orderedVector.assign(mainSeq.begin(), mainSeq.end());
 }
 
 std::vector<std::pair<uint, uint> >
-PmergeMe::createVectorPairs(std::vector<uint> &copy)
+PmergeMe::createVectorPairs(std::vector<uint> &_orderedVector)
 {
 	std::vector<uint>::iterator it, next;
   	std::vector<std::pair<uint, uint> > pairs;
 
-  	it = copy.begin();
-  	while (it != copy.end())
+  	it = _orderedVector.begin();
+  	while (it != _orderedVector.end())
 	{
     	next = it + 1;
     	pairs.push_back(std::make_pair(*it, *next));

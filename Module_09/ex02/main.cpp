@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
       return (1);
     }
 
+	std::cout << "---- VECTOR ----" << std::endl;
     std::cout << "Before: ";
 	input.printUnsorted();
 
@@ -53,7 +54,7 @@ int main(int argc, char *argv[])
                 << " seconds" << std::endl;
 
     // start = clock();
-	// input.sortList();
+	// input.sortDeque();
 	// end = clock();
 
     // std::cout << std::endl;

@@ -39,22 +39,19 @@ class PmergeMe
         void printSorted(void);
 		size_t containerSize(void);
 
-		void sortList(void);
-		void binaryListInsert(unsigned int value);
 		void sortVector(void);
-		void binaryVectorInsert(unsigned int value);
-		static bool pairCompare(std::pair<unsigned int, unsigned int> a, std::pair<unsigned int, unsigned int> b);
 
 		static int jacobsthal(int n);
 
 
 	private:
+		std::vector<unsigned int> _checkDuplicate;
+
 		std::deque<unsigned int> _inputDeque;
 		std::deque<unsigned int> _orderedDeque;
-		std::list<unsigned int> _orderedList;
-		std::vector<unsigned int> _orderedVector;
+
 		std::vector<unsigned int> _inputVector;
-		std::vector<unsigned int> _printOrderedVector;
+		std::vector<unsigned int> _orderedVector;
 
 		static std::vector<std::pair<uint, uint> >
   		createVectorPairs(std::vector<uint> &copy);
