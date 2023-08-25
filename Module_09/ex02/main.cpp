@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 19:33:50 by azamario          #+#    #+#             */
-/*   Updated: 2023/08/24 19:33:53 by azamario         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:55:24 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 	input.printDequeSorted();
     std::cout << std::endl;
 	std::cout   << "Time to process a range of " << input.containerSize() 
-                << " elements with std::list : " << static_cast<double>(end - start) / CLOCKS_PER_SEC
+                << " elements with std::deque : " << static_cast<double>(end - start) / CLOCKS_PER_SEC
                 << " seconds" << std::endl;
 
     std::cout << std::endl;
